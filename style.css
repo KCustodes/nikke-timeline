@@ -195,6 +195,16 @@ body {
     color: #ccc;
 }
 
+.modal-body ul {
+    margin: 15px 0;
+    padding-left: 25px;
+}
+
+.modal-body li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
 .modal-video {
     width: 100%;
     aspect-ratio: 16/9;
