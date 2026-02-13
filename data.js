@@ -1,7 +1,7 @@
 const ENTRIES = [
     // ===== MAIN STORY =====
     {
-        type: "main_timeline",
+        type: "main_story",
         chapter: "Pre-First Invasion",
         title: "Pre-First Invasion",
         era: "Pre-First Invasion",
