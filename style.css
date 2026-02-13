@@ -51,11 +51,10 @@ body {
 .timeline {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: 50px 100px;
     min-width: max-content;
     position: relative;
-    height: 100%;
+    margin-top: 150px;   /* positive moves it down */
 }
 
 .timeline::before {
