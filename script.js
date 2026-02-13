@@ -87,7 +87,11 @@ function drawConnections() {
         const startY = entryRect.top + entryRect.height/2 - timelineRect.top;
         
         // Draw a line to each connected entry
-        entry.connections.forEach(targetId => {
+        entry.connections.forEach(connection => {
+            // Handle both string and object formats
+            const targetId = typeof connection === 'string' ? connection : connection.target;
+            const lineType = typeof connection === 'string' ? 'curved' : (connection.type || 'curved');
+            
             if (!entryPositions[targetId]) return;
             
             const targetElement = entryPositions[targetId].element;
@@ -97,27 +101,39 @@ function drawConnections() {
             const endX = targetRect.left + targetRect.width/2 - timelineRect.left;
             const endY = targetRect.top + targetRect.height/2 - timelineRect.top;
             
-            // Create the path
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            
-            // Create a curved path
-            const midX = (startX + endX) / 2;
-            const midY = (startY + endY) / 2;
-            const controlOffset = Math.abs(endX - startX) * 0.2;  // Curve amount
-            
-            let d;
-            if (entryData.isBottom === entryPositions[targetId].isBottom) {
-                // Both on same side - create a curved line
-                d = `M ${startX} ${startY} Q ${midX} ${midY - controlOffset} ${endX} ${endY}`;
+            if (lineType === 'straight') {
+                // Create a straight line
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', startX);
+                line.setAttribute('y1', startY);
+                line.setAttribute('x2', endX);
+                line.setAttribute('y2', endY);
+                line.setAttribute('class', 'connection-line straight');
+                
+                svg.appendChild(line);
             } else {
-                // On opposite sides - create a different curve
-                d = `M ${startX} ${startY} Q ${midX - controlOffset} ${midY} ${endX} ${endY}`;
+                // Create a curved path
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                
+                // Create a curved path
+                const midX = (startX + endX) / 2;
+                const midY = (startY + endY) / 2;
+                const controlOffset = Math.abs(endX - startX) * 0.2;  // Curve amount
+                
+                let d;
+                if (entryData.isBottom === entryPositions[targetId].isBottom) {
+                    // Both on same side - create a curved line
+                    d = `M ${startX} ${startY} Q ${midX} ${midY - controlOffset} ${endX} ${endY}`;
+                } else {
+                    // On opposite sides - create a different curve
+                    d = `M ${startX} ${startY} Q ${midX - controlOffset} ${midY} ${endX} ${endY}`;
+                }
+                
+                path.setAttribute('d', d);
+                path.setAttribute('class', 'connection-line');
+                
+                svg.appendChild(path);
             }
-            
-            path.setAttribute('d', d);
-            path.setAttribute('class', 'connection-line');
-            
-            svg.appendChild(path);
         });
     });
 }
