@@ -255,14 +255,22 @@ body {
 }
 
 .connection-line {
-    stroke: #8b2a8b;
     stroke-width: 2;
-    stroke-dasharray: 5, 5;
     fill: none;
     opacity: 0.6;
 }
 
+.connection-line.curved {
+    stroke: #8b2a8b;
+    stroke-dasharray: 5, 5;
+}
+
+.connection-line.straight {
+    stroke: #4ecdc4;
+    stroke-dasharray: 0;
+}
+
 .connection-line:hover {
-    stroke: #c77dff;
     opacity: 1;
+    stroke-width: 3;
 }
