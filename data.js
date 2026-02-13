@@ -20,28 +20,33 @@ const ENTRIES = [
         era: "First Era",
         year: 5,
         summary: "The hero leaves the village.",
-        content: "Another detailed description here.",
+        content: "More content here.",
         characters: ["Hero"],
         locations: ["Forest Path"],
         tags: ["journey"],
         image: "",
-        youtube: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-    },
-    
-    // ===== EVENT STORIES =====
-    {
+        youtube: "",
+        id: "ms-002",
+        connections: [
+            { target: "ms-003", type: "curved" }
+    ]
+},
+    // ===== EVENT STORY =====
+{
         type: "event_story",
         title: "Festival of Shadows",
         era: "First Era",
         year: 50,
-        summary: "A dark celebration occurs.",
-        content: "Event story description.",
+        summary: "A dark celebration.",
+        content: "Event content.",
         characters: ["Priestess Ara"],
         locations: ["Temple"],
-        tags: ["festival", "ritual"],
+        tags: ["festival"],
         image: "",
-        youtube: ""
-    },
+        youtube: "",
+        id: "es-001",
+        connections: []
+},
     
     // Add more entries following the same format...
     // Copy and paste the structure for each entry
