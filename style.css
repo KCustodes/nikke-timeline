@@ -1,0 +1,225 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0d0d1a;
+    color: #e0e0e0;
+    font-family: Georgia, serif;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #141428;
+    padding: 15px 20px;
+    z-index: 100;
+    border-bottom: 1px solid #2a2a4a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header h1 {
+    color: #c77dff;
+    font-size: 24px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+.controls input, .controls select {
+    padding: 8px 12px;
+    background: #1a1a2e;
+    border: 1px solid #3a3a5a;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.timeline-viewport {
+    margin-top: 80px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: calc(100vh - 80px);
+    cursor: grab;
+}
+
+.timeline {
+    display: flex;
+    align-items: center;
+    padding: 50px 100px;
+    min-width: max-content;
+    position: relative;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #8b2a8b;
+}
+
+.era-group {
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    position: relative;
+}
+
+.era-label {
+    position: absolute;
+    top: -60px;
+    color: #c77dff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.entry {
+    position: relative;
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.entry-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #0d0d1a;
+    transition: transform 0.2s;
+}
+
+.entry:hover .entry-dot {
+    transform: scale(1.3);
+    box-shadow: 0 0 15px currentColor;
+}
+
+.entry[data-type="main_story"] .entry-dot { background: #ff6b6b; }
+.entry[data-type="event_story"] .entry-dot { background: #4ecdc4; }
+.entry[data-type="side_mission"] .entry-dot { background: #ffe66d; }
+.entry[data-type="side_story"] .entry-dot { background: #a29bfe; }
+
+.entry-title {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    white-space: nowrap;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    color: #aaa;
+}
+
+.entry-title.bottom {
+    top: auto;
+    bottom: -40px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+    background: #1a1a2e;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid #3a3a5a;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-type {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.modal-type.main_story { color: #ff6b6b; }
+.modal-type.event_story { color: #4ecdc4; }
+.modal-type.side_mission { color: #ffe66d; }
+.modal-type.side_story { color: #a29bfe; }
+
+.modal-content h2 {
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.modal-meta {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.modal-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.modal-body {
+    line-height: 1.7;
+    color: #ccc;
+}
+
+.modal-video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.legend {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #141428;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 3px 0;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
