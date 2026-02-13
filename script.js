@@ -1,4 +1,5 @@
 let entries = [...ENTRIES];
+const entryPositions = {};
 
 const timeline = document.getElementById('timeline');
 const modal = document.getElementById('modal');
@@ -6,15 +7,22 @@ const modalBody = document.getElementById('modalBody');
 const searchInput = document.getElementById('searchInput');
 const filterType = document.getElementById('filterType');
 const viewport = document.getElementById('viewport');
-const entryPositions = {};
 
 // Render timeline
 function render() {
+    // Clear everything including SVG
     timeline.innerHTML = '';
     
     // Add SVG for connections
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.id = 'connectionsSvg';
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'none';
+    svg.style.zIndex = '1';
     timeline.appendChild(svg);
     
     // Group by era
@@ -35,7 +43,7 @@ function render() {
             const div = document.createElement('div');
             div.className = 'entry';
             div.dataset.type = entry.type;
-            div.dataset.id = entry.id || '';  // Use the ID for positioning
+            div.dataset.id = entry.id || '';
             
             div.innerHTML = `
                 <span class="entry-title ${isBottom ? 'bottom' : ''}">${entry.title}</span>
@@ -58,94 +66,68 @@ function render() {
         timeline.appendChild(group);
     });
     
-    // Draw connections after a delay to ensure positions are calculated
+    // Draw connections after elements are rendered
     setTimeout(drawConnections, 100);
 }
 
 // Draw connections between entries
 function drawConnections() {
     const svg = document.getElementById('connectionsSvg');
-    svg.innerHTML = '';  // Clear existing lines
+    if (!svg) return;
     
-    // Get the timeline's position relative to the viewport
+    svg.innerHTML = '';
+    
     const timelineRect = timeline.getBoundingClientRect();
     
-    // Draw connections for each entry
     Object.keys(entryPositions).forEach(entryId => {
         const entryData = entryPositions[entryId];
         const entry = entryData.entry;
         
         if (!entry.connections || entry.connections.length === 0) return;
         
-        // Get the position of this entry's dot
-        const entryElement = entryData.element;
-        const entryDot = entryElement.querySelector('.entry-dot');
+        const entryDot = entryData.element.querySelector('.entry-dot');
         const entryRect = entryDot.getBoundingClientRect();
         
-        // Calculate position relative to the SVG
         const startX = entryRect.left + entryRect.width/2 - timelineRect.left;
         const startY = entryRect.top + entryRect.height/2 - timelineRect.top;
         
-        // Draw a line to each connected entry
         entry.connections.forEach(connection => {
-            // Handle both string and object formats
             const targetId = typeof connection === 'string' ? connection : connection.target;
             const lineType = typeof connection === 'string' ? 'curved' : (connection.type || 'curved');
             
             if (!entryPositions[targetId]) return;
             
-            const targetElement = entryPositions[targetId].element;
-            const targetDot = targetElement.querySelector('.entry-dot');
+            const targetDot = entryPositions[targetId].element.querySelector('.entry-dot');
             const targetRect = targetDot.getBoundingClientRect();
             
             const endX = targetRect.left + targetRect.width/2 - timelineRect.left;
             const endY = targetRect.top + targetRect.height/2 - timelineRect.top;
             
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            
+            let d;
+            
             if (lineType === 'straight') {
-                // Create a straight line
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', startX);
-                line.setAttribute('y1', startY);
-                line.setAttribute('x2', endX);
-                line.setAttribute('y2', endY);
-                line.setAttribute('class', 'connection-line straight');
-                
-                svg.appendChild(line);
+                d = `M ${startX} ${startY} L ${endX} ${endY}`;
             } else {
-                // Create a curved path
-                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                
-                // Create a curved path
                 const midX = (startX + endX) / 2;
                 const midY = (startY + endY) / 2;
-                const controlOffset = Math.abs(endX - startX) * 0.2;  // Curve amount
+                const controlOffset = Math.abs(endX - startX) * 0.2;
                 
-                let d;
                 if (entryData.isBottom === entryPositions[targetId].isBottom) {
-                    // Both on same side - create a curved line
                     d = `M ${startX} ${startY} Q ${midX} ${midY - controlOffset} ${endX} ${endY}`;
                 } else {
-                    // On opposite sides - create a different curve
                     d = `M ${startX} ${startY} Q ${midX - controlOffset} ${midY} ${endX} ${endY}`;
                 }
-                
-                path.setAttribute('d', d);
-                path.setAttribute('class', 'connection-line');
-                
-                svg.appendChild(path);
             }
+            
+            path.setAttribute('d', d);
+            path.setAttribute('class', `connection-line ${lineType}`);
+            
+            svg.appendChild(path);
         });
     });
 }
-
-// Redraw connections when scrolling or resizing
-viewport.addEventListener('scroll', () => {
-    setTimeout(drawConnections, 100);
-});
-
-window.addEventListener('resize', () => {
-    setTimeout(drawConnections, 100);
-});
 
 // Show modal
 function showModal(entry) {
@@ -210,6 +192,10 @@ viewport.onmousemove = (e) => {
     viewport.scrollLeft = scrollLeft - (e.pageX - viewport.offsetLeft - startX);
 };
 
+// Redraw connections on scroll/resize
+viewport.addEventListener('scroll', () => setTimeout(drawConnections, 50));
+window.addEventListener('resize', () => setTimeout(drawConnections, 50));
+
 // Add legend
 document.body.insertAdjacentHTML('beforeend', `
     <div class="legend">
@@ -220,4 +206,5 @@ document.body.insertAdjacentHTML('beforeend', `
     </div>
 `);
 
+// Initial render
 render();
