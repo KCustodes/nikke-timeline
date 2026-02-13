@@ -1,16 +1,16 @@
 const ENTRIES = [
     // ===== MAIN STORY =====
     {
-        type: "main_story",
-        chapter: 1,
-        title: "The Awakening",
-        era: "First Era",
-        year: 0,
-        summary: "The hero awakens with no memory.",
+        type: "main_timeline",
+        chapter: "Pre-First Invasion",
+        title: "Pre-First Invasion",
+        era: "Pre-First Invasion",
+        year: "+100 Before Chapter 1",
+        summary: "Humanity before the Raptures",
         content: "Write your full lore description here. This can be as long as you want.",
-        characters: ["Hero", "Mentor"],
-        locations: ["Starting Village"],
-        tags: ["origin", "protagonist"],
+        characters: ["Humanity", "V.T.C."],
+        locations: ["Earth"],
+        tags: ["Human", "Humanity", "V.T.C."],
         image: "https://via.placeholder.com/400x200",
         youtube: ""
     },
