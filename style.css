@@ -190,11 +190,6 @@ body {
     margin-bottom: 15px;
 }
 
-.modal-body {
-    line-height: 1.7;
-    color: #ccc;
-}
-
 .modal-body ul {
     margin: 15px 0;
     padding-left: 25px;
@@ -203,6 +198,20 @@ body {
 .modal-body li {
     margin-bottom: 8px;
     line-height: 1.5;
+}
+
+.modal-body p {
+    margin-bottom: 15px;
+}
+
+.modal-body strong {
+    color: #c77dff;
+    font-weight: bold;
+}
+
+.modal-body em {
+    color: #a29bfe;
+    font-style: italic;
 }
 
 .modal-video {
