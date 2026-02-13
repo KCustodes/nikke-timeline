@@ -5,7 +5,7 @@ const ENTRIES = [
         chapter: "Pre-First Invasion",
         title: "Pre-First Invasion",
         era: "Pre-First Invasion",
-        year: "+100 Before Chapter 1",
+        year: "+100 Years Before Chapter 1",
         summary: "Humanity before the Raptures",
         content: "Write your full lore description here. This can be as long as you want.",
         characters: ["Humanity", "V.T.C."],
