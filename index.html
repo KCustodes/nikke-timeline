@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Lore Timeline</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Game Lore Timeline</h1>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <select id="filterType">
+                <option value="">All Types</option>
+                <option value="main_story">Main Story</option>
+                <option value="event_story">Event Stories</option>
+                <option value="side_mission">Side Missions</option>
+                <option value="side_story">Side Stories</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="timeline-viewport" id="viewport">
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
