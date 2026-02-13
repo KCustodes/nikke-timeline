@@ -7,7 +7,7 @@ const ENTRIES = [
         era: "Pre-First Invasion",
         year: "+100 Years Before Chapter 1",
         summary: "Humanity before the Raptures",
-        content: "Write your full lore description here. This can be as long as you want.",
+        content: "World was similar to what we know in real life, maybe at least another hundred years or so. <ul><li>Manufactures such as Elysion, Missilis and Tetra existed but no exact detail on how big they were aside from Relics stating them to be enterprises. (Early Relics called them by Elysion Enterprises, Missilis Industries, and Tetra Entertainment).</li><li>Military strength similar to IRL or at least slightly more advanced.</li><li>Einkk stated that she is roughly 20 years old (Memory of Goddess secret cutscene) which puts her origins during Pre-First Invasion but no other specifics on who or what made her.</li><li>Based off Chapter 43, the VTC has existed for a long time and made many strides in the advancement of technology even before the creation of Nikkes.</li></ul>",
         characters: ["Humanity", "V.T.C."],
         locations: ["Earth"],
         tags: ["Human", "Humanity", "V.T.C."],
