@@ -1,6 +1,7 @@
 const ENTRIES = [
     // ===== MAIN STORY =====
     {
+        id: "ms-001",
         type: "main_story",
         title: "Pre-First Invasion",
         era: "Pre-First Invasion",
@@ -9,13 +10,13 @@ const ENTRIES = [
         content: "More content here.",
         locations: ["Earth"],
         tags: ["Humanity", "V.T.C."],
-        image: "images/Chapter Thumbnails/Sky2.png",
-        id: "",
-        connections: [
-            { target: "", type: "" }
-        
+        image: "images/Sky2.png",
+        youtube: "",
+        connections: []
     },
+    
     {
+        id: "ms-002",
         type: "main_story",
         title: "The First Invasion",
         era: "The First Invasion",
@@ -26,17 +27,18 @@ const ENTRIES = [
         tags: ["Humanity", "U.F.H.", "V.T.C."],
         image: "",
         youtube: "",
-        id: "",
         connections: [
-            { target: "", type: "" }
-    ]
-},
+            { target: "ms-001", type: "curved" }
+        ]
+    },
+    
     // ===== EVENT STORY =====
-{
+    {
+        id: "es-001",
         type: "event_story",
         title: "Festival of Shadows",
         era: "First Era",
-        year: 50,
+        timeline: 50,
         summary: "A dark celebration.",
         content: "Event content.",
         characters: ["Priestess Ara"],
@@ -44,10 +46,6 @@ const ENTRIES = [
         tags: ["festival"],
         image: "",
         youtube: "",
-        id: "es-001",
         connections: []
-},
-    
-    // Add more entries following the same format...
-    // Copy and paste the structure for each entry
+    }
 ];
