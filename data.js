@@ -25,7 +25,7 @@ const ENTRIES = [
         content: "More content here.",
         locations: ["Earth", "Space Station"],
         tags: ["Humanity", "U.F.H.", "V.T.C."],
-        image: "",
+        image: "images/SpaceElevator.png",
         youtube: "",
         connections: [
             { target: "ms-001", type: "curved" }
