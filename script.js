@@ -132,6 +132,7 @@ function render() {
             const div = document.createElement('div');
             div.className = 'entry';
             if (entry.important) div.classList.add('important');
+            if (entry.isStartPoint) div.classList.add('start-point');
             div.dataset.type = entry.type;
             div.dataset.id = entry.id || '';
             
