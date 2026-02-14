@@ -209,6 +209,20 @@ body {
     z-index: 2;
 }
 
+.entry.start-point .entry-dot {
+    width: 24px;
+    height: 24px;
+    border-width: 4px;
+    animation: pulse 2s infinite;
+    background: #ff6b6b;
+    box-shadow: 0 0 20px #ff6b6b;
+}
+
+.entry.start-point .entry-title {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
 .entry-dot {
     width: 16px;
     height: 16px;
