@@ -28,6 +28,24 @@ function init() {
     render();
     setupEventListeners();
     checkURLHash();
+    
+    // Scroll to start point (Chapter 1) after render
+    setTimeout(scrollToStartPoint, 300);
+}
+
+function scrollToStartPoint() {
+    // Check if URL has a specific entry first
+    if (window.location.hash) return;
+    
+    // Find the start point entry
+    const startEntry = allEntries.find(e => e.isStartPoint);
+    if (!startEntry) return;
+    
+    // Find the entry element
+    const entryEl = document.querySelector(`.entry[data-id="${startEntry.id}"]`);
+    if (entryEl) {
+        entryEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
+    }
 }
 
 // ===== POPULATE FILTERS =====
@@ -102,11 +120,11 @@ function render() {
         label.textContent = era;
         group.appendChild(label);
         
-        // Sort entries
+        // Sort entries by sortOrder
         const sortedEntries = [...eras[era]].sort((a, b) => {
-            const yearA = a.year || a.timeline || 0;
-            const yearB = b.year || b.timeline || 0;
-            return String(yearA).localeCompare(String(yearB), undefined, {numeric: true});
+            const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
+            const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
+            return orderA - orderB;
         });
         
         // Render entries
@@ -314,7 +332,13 @@ function renderModalContent(entry) {
         <div class="modal-type ${entry.type}">${typeLabel}${chapter}</div>
         <h2>${entry.title}</h2>
         <div class="modal-meta">
-            <span>📅 ${entry.era}${entry.year ? `, Year ${entry.year}` : ''}${entry.timeline ? `, ${entry.timeline}` : ''}</span>
+        html += `<span>📅 ${entry.era}`;
+        if (entry.timeline) {
+            html += ` | ${entry.timeline}`;
+        } else if (entry.year !== undefined) {
+            html += ` | Year ${entry.year}`;
+        }
+        html += `</span>`;
     `;
     
     if (entry.characters && entry.characters.length) {
@@ -504,13 +528,12 @@ function applySort() {
             break;
         case 'year':
             entries.sort((a, b) => {
-                const yearA = a.year || 0;
-                const yearB = b.year || 0;
-                return yearA - yearB;
+                const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
+                const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
+                return orderA - orderB;
             });
             break;
         default:
-            // Keep original order
             break;
     }
 }
