@@ -37,8 +37,8 @@ function render() {
 function createConnectionsSvg() {
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.id = 'connectionsSvg';
-    svg.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;';
-    elements.timeline.appendChild(svg);
+    svg.style.cssText = 'position:absolute;top:-200px;left:-100px;width:calc(100% + 200px);height:500px;pointer-events:none;z-index:1;overflow:visible;';
+    timeline.appendChild(svg);
 }
 
 /**
