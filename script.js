@@ -86,7 +86,7 @@ function render() {
 
     eraJump.innerHTML = '<span>Jump to Era:</span>';
 
-    Object.keys(eras).forEach(era => {
+    Object.keys(eras).forEach((era, idx, eraKeys) => {
         eraJump.innerHTML += `<button data-era="${era}">${era}</button>`;
 
         const group = document.createElement('div');
@@ -95,10 +95,29 @@ function render() {
         group.dataset.eraIndex = eraIndex;
         group.id = `era-${era.replace(/\s+/g, '-').toLowerCase()}`;
 
+        // Get first entry with an image for background
+        const firstEntryWithImage = eras[era].find(e => e.image);
+        if (firstEntryWithImage && firstEntryWithImage.image) {
+            group.style.setProperty('--era-bg-image', `url('${firstEntryWithImage.image}')`);
+        }
+
+        // Era label
         const label = document.createElement('span');
         label.className = 'era-label';
         label.textContent = era;
         group.appendChild(label);
+
+        // Era background overlay
+        const bgOverlay = document.createElement('div');
+        bgOverlay.className = 'era-bg-overlay';
+        group.appendChild(bgOverlay);
+
+        // Era divider (except for last era)
+        if (idx < eraKeys.length - 1) {
+            const divider = document.createElement('div');
+            divider.className = 'era-divider';
+            group.appendChild(divider);
+        }
 
         const sortedEntries = [...eras[era]].sort((a, b) => {
             const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
@@ -114,12 +133,24 @@ function render() {
             div.dataset.type = entry.type;
             div.dataset.id = entry.id || '';
 
-            const thumbnail = entry.image ? `<img class="entry-thumbnail" src="${entry.image}" alt="">` : '';
+            // Use entry image or placeholder
+            const imgSrc = entry.image || 'https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image';
+            
+            // Type indicator color
+            const typeColors = {
+                main_story: '#ff6b6b',
+                event_story: '#4ecdc4',
+                side_mission: '#ffe66d',
+                side_story: '#a29bfe'
+            };
+            const typeColor = typeColors[entry.type] || '#888';
 
             div.innerHTML = `
+                <div class="entry-box ${isBottom ? 'bottom' : ''}">
+                    <img class="entry-image" src="${imgSrc}" alt="${entry.title}" onerror="this.src='https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image'">
+                    <div class="entry-type-bar" style="background:${typeColor}"></div>
+                </div>
                 <span class="entry-title ${isBottom ? 'bottom' : ''}">${entry.title}</span>
-                ${thumbnail}
-                <div class="entry-dot"></div>
             `;
 
             div.onclick = () => openModal(entry);
