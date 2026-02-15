@@ -98,15 +98,32 @@ const ENTRIES = [
         image: "",
         youtube: "",
         connections: []
-    },	
-	
+    },
+
 	{
         id: "es-004",
+        type: "event_story",
+        title: "Red Ash Epilogue",
+        era: "Post-Ark Sealing",
+        timeline: "58 BC1 (Before Chapter 1)",
+        sortOrder: -95,
+        summary: "",
+        content: "",
+        characters: ["Cinderella", "Abe", "Red Shoes", "Siren", "Hansel", "Gretel", "Oswald", "The Rapture Queen", "Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
+        locations: ["Earth"],
+        tags: ["Old Tales Squad", "Goddess Squad", "U.F.H.", "V.T.C.", "The Central Government", "The Rapture Queen"],
+        image: "",
+        youtube: "",
+        connections: []
+    },
+	
+	{
+        id: "es-005",
         type: "event_story",
         title: "Ark Guardian Part 1",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -95,
+        sortOrder: -94,
         summary: "",
         content: "",
         characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald", "Freesia"],
@@ -118,12 +135,12 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-005",
+        id: "es-006",
         type: "event_story",
         title: "Old Tales Part 2",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -94,
+        sortOrder: -93,
         summary: "",
         content: "",
         characters: ["Cinderella", "Abe", "Red Shoes", "Siren", "Hansel", "Gretel", "Oswald", "The Rapture Queen"],
@@ -133,14 +150,33 @@ const ENTRIES = [
         youtube: "",
         connections: []
     },
+
+	{
+        id: "es-007",
+        type: "event_story",
+        title: "Old Tales Epilogue",
+        era: "The First Invasion",
+        timeline: "91 - 74 BC1 (Before Chapter 1)",
+        sortOrder: -74,
+        summary: "",
+        content: "",
+        characters: ["Cinderella", "Abe", "Nihilister"],
+        locations: ["Earth", "The Ark"],
+        tags: ["Old Tales Squad", "The Central Government"],
+        image: "",
+        youtube: "",
+        connections: [
+			{ target: "es-006", type: "curved" }
+		]
+    },
 	
 	{
-        id: "es-006",
+        id: "es-008",
         type: "event_story",
         title: "Ark Guardian Part 2",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -93,
+        sortOrder: -92,
         summary: "",
         content: "",
         characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald", "Freesia", "Mirror", "Liberalio"],
@@ -152,17 +188,51 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-007",
+        id: "es-009",
         type: "event_story",
         title: "Over Zone",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -92,
+        sortOrder: -91,
         summary: "",
         content: "",
         characters: ["Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald"],
         locations: ["Earth"],
         tags: ["Goddess Squad", "The Central Government", "The Rapture Queen"],
+        image: "",
+        youtube: "",
+        connections: []
+    },
+	
+	{
+        id: "es-010",
+        type: "event_story",
+        title: "Footstep, Walk, Run",
+        era: "Post-Ark Sealing",
+        timeline: "89? - 58 BC1 (Before Chapter 1)",
+        sortOrder: -88,
+        summary: "",
+        content: "",
+        characters: ["Rapi", "Red Hood"],
+        locations: ["The Ark"],
+        tags: [""],
+        image: "",
+        youtube: "",
+        connections: []
+    },
+	
+	{
+        id: "es-011",
+        type: "event_story",
+        title: "Footstep, Walk, Run Part 2",
+        era: "Post-Ark Sealing",
+        timeline: "58 - 54 BC1 (Before Chapter 1)",
+        sortOrder: -59,
+        summary: "",
+        content: "",
+        characters: ["Rapi", "Red Hood"],
+        locations: ["The Ark"],
+        tags: [""],
         image: "",
         youtube: "",
         connections: []
@@ -195,6 +265,23 @@ const ENTRIES = [
         content: "NO KNOWN INFORMATION AS OF NOW",
         locations: ["Earth", "The Ark"],
         tags: ["The Ark", "The Central Government", "Nikke", "Second Reclamation War"],
+        image: "",
+        youtube: "",
+        connections: []
+    },
+
+	{
+        id: "ss-001",
+        type: "side_story",
+        title: "Mudfish",
+        era: "Post-Ark Sealing",
+        timeline: "91 - 70 BC1 (Before Chapter 1)",
+        sortOrder: -87,
+        summary: "",
+        content: "",
+        characters: ["Siren", "Leviathan"],
+        locations: ["Earth"],
+        tags: ["Old Tales Squad"],
         image: "",
         youtube: "",
         connections: []
