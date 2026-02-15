@@ -318,19 +318,20 @@ body {
 }
 
 .connection-line {
-    stroke-width: 2;
     fill: none;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+    stroke: rgba(255, 255, 255, 0.4);
+    stroke-width: 2;
+    transition: stroke 0.3s;
+    pointer-events: none;
 }
 
 .connection-line.curved {
-    stroke: #8b2a8b;
-    stroke-dasharray: 5, 5;
+    stroke: rgba(199, 125, 255, 0.5);
 }
 
 .connection-line.straight {
-    stroke: #4ecdc4;
+    stroke: rgba(255, 107, 107, 0.5);
+    stroke-dasharray: 8, 4;
 }
 
 /* Minimap */
