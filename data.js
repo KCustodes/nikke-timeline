@@ -343,4 +343,23 @@ const ENTRIES = [
         youtube: "",
         connections: []
     }
+
+	{
+		id: "ms-003",
+        type: "main_story",
+        chapter: 2,
+        title: "Chapter 3: Identification",
+        era: "The Beginning",
+        timeline: "Within the same day as CH 2",
+        sortOrder: 20,
+        summary: "Content...",
+        content: "Full description...",
+        characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
+        locations: ["The Surface", "The Ark", "The Outpost"],
+        tags: ["Chapter 2"],
+        image: "",
+        youtube: "",
+        connections: []
+	}
+
 ];
