@@ -4,9 +4,7 @@ let allEntries = [...ENTRIES];
 let currentEntryIndex = 0;
 let filteredIndices = [];
 let bookmarks = JSON.parse(localStorage.getItem('timelineBookmarks') || '[]');
-let currentZoom = 1;
 let currentSort = 'default';
-let entryPositions = {};
 let isDown = false;
 let startX = 0;
 let scrollLeft = 0;
@@ -75,13 +73,6 @@ function populateFilters() {
 // ===== RENDER TIMELINE =====
 function render() {
     timeline.innerHTML = '';
-    entryPositions = {};
-
-    // Create SVG for connections with expanded bounds
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.id = 'connectionsSvg';
-    svg.style.cssText = 'position:absolute;top:-250px;left:-100px;width:calc(100% + 200px);height:600px;pointer-events:none;z-index:1;overflow:visible;';
-    timeline.appendChild(svg);
 
     // Group by era
     const eras = {};
@@ -134,14 +125,6 @@ function render() {
             div.onclick = () => openModal(entry);
             group.appendChild(div);
 
-            if (entry.id) {
-                entryPositions[entry.id] = {
-                    element: div,
-                    isBottom: isBottom,
-                    entry: entry
-                };
-            }
-
             isBottom = !isBottom;
         });
 
@@ -149,7 +132,6 @@ function render() {
         eraIndex++;
     });
 
-    setTimeout(drawConnections, 100);
     renderMinimap();
     updateFilteredIndices();
 }
@@ -194,76 +176,6 @@ function updateMinimapViewport() {
 
     viewportIndicator.style.left = `${scrollPercent * 100}%`;
     viewportIndicator.style.width = `${Math.max(viewportPercent * 100, 5)}%`;
-}
-
-// ===== DRAW CONNECTIONS =====
-function drawConnections() {
-    const svg = document.getElementById('connectionsSvg');
-    if (!svg) return;
-
-    svg.querySelectorAll('path').forEach(p => p.remove());
-
-    const timelineRect = timeline.getBoundingClientRect();
-
-    Object.keys(entryPositions).forEach(entryId => {
-        const entryData = entryPositions[entryId];
-        const entry = entryData.entry;
-
-        if (!entry.connections || entry.connections.length === 0) return;
-
-        const entryDot = entryData.element.querySelector('.entry-dot');
-        if (!entryDot) return;
-
-        const entryRect = entryDot.getBoundingClientRect();
-        const startX = entryRect.left + entryRect.width / 2 - timelineRect.left;
-        const startY = entryRect.top + entryRect.height / 2 - timelineRect.top;
-
-        entry.connections.forEach(connection => {
-            const targetId = typeof connection === 'string' ? connection : connection.target;
-            const lineType = typeof connection === 'string' ? 'curved' : (connection.type || 'curved');
-
-            if (!entryPositions[targetId]) return;
-
-            const targetDot = entryPositions[targetId].element.querySelector('.entry-dot');
-            if (!targetDot) return;
-
-            const targetRect = targetDot.getBoundingClientRect();
-            const endX = targetRect.left + targetRect.width / 2 - timelineRect.left;
-            const endY = targetRect.top + targetRect.height / 2 - timelineRect.top;
-
-            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-            let d;
-            if (lineType === 'straight') {
-                d = `M ${startX} ${startY} L ${endX} ${endY}`;
-            } else {
-                // Calculate curve
-                const distance = Math.abs(endX - startX);
-                const midX = (startX + endX) / 2;
-                const midY = (startY + endY) / 2;
-                
-                // Dramatic arc height - this controls how visible the curve is
-                const arcHeight = Math.max(distance * 0.6, 150);
-                
-                // Direction: bottom entries curve downward, top entries curve upward
-                const direction = entryData.isBottom ? 1 : -1;
-
-                if (entryData.isBottom === entryPositions[targetId].isBottom) {
-                    // Same side - arc away from timeline
-                    const controlY = midY + (arcHeight * direction);
-                    d = `M ${startX} ${startY} Q ${midX} ${controlY} ${endX} ${endY}`;
-                } else {
-                    // Different sides - S-curve
-                    const controlOffset = Math.max(distance * 0.5, 100);
-                    d = `M ${startX} ${startY} C ${midX + controlOffset} ${startY}, ${midX + controlOffset} ${endY}, ${endX} ${endY}`;
-                }
-            }
-
-            path.setAttribute('d', d);
-            path.setAttribute('class', `connection-line ${lineType}`);
-            svg.appendChild(path);
-        });
-    });
 }
 
 // ===== UPDATE FILTERED INDICES =====
@@ -421,13 +333,6 @@ function findRelatedEntries(entry) {
         if (entry.tags && e.tags) {
             const sharedTags = entry.tags.filter(t => e.tags.includes(t));
             score += sharedTags.length;
-        }
-
-        if (entry.connections && entry.connections.some(c => {
-            const targetId = typeof c === 'string' ? c : c.target;
-            return targetId === e.id;
-        })) {
-            score += 5;
         }
 
         if (score > 0) {
@@ -638,23 +543,6 @@ function checkURLHash() {
     }
 }
 
-// ===== ZOOM =====
-function zoomIn() {
-    currentZoom = Math.min(currentZoom + 0.1, 2);
-    applyZoom();
-}
-
-function zoomOut() {
-    currentZoom = Math.max(currentZoom - 0.1, 0.5);
-    applyZoom();
-}
-
-function applyZoom() {
-    timeline.style.transform = `scale(${currentZoom})`;
-    document.getElementById('zoomLevel').textContent = `${Math.round(currentZoom * 100)}%`;
-    setTimeout(drawConnections, 100);
-}
-
 // ===== ERA JUMP =====
 function jumpToEra(era) {
     const eraGroup = document.getElementById(`era-${era.replace(/\s+/g, '-').toLowerCase()}`);
@@ -758,9 +646,6 @@ function setupEventListeners() {
 
     document.getElementById('sortBtn').onclick = cycleSort;
 
-    document.getElementById('zoomIn').onclick = zoomIn;
-    document.getElementById('zoomOut').onclick = zoomOut;
-
     eraJump.onclick = (e) => {
         if (e.target.dataset.era) {
             jumpToEra(e.target.dataset.era);
@@ -774,15 +659,9 @@ function setupEventListeners() {
     viewport.addEventListener('mouseleave', endDrag);
     viewport.addEventListener('mousemove', doDrag);
 
-    viewport.addEventListener('scroll', () => {
-        updateMinimapViewport();
-        setTimeout(drawConnections, 50);
-    });
+    viewport.addEventListener('scroll', updateMinimapViewport);
 
-    window.addEventListener('resize', () => {
-        updateMinimapViewport();
-        setTimeout(drawConnections, 100);
-    });
+    window.addEventListener('resize', updateMinimapViewport);
 
     window.addEventListener('hashchange', checkURLHash);
 
