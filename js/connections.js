@@ -39,7 +39,29 @@ function drawConnections() {
             const endY = targetRect.top + targetRect.height / 2 - timelineRect.top;
 
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const d = calculatePath(startX, startY, endX, endY, lineType, entryData.isBottom, entryPositions[targetId].isBottom);
+
+            let d;
+            if (lineType === 'straight') {
+                d = `M ${startX} ${startY} L ${endX} ${endY}`;
+            } else {
+                const midX = (startX + endX) / 2;
+                const midY = (startY + endY) / 2;
+                const distance = Math.abs(endX - startX);
+                
+                // Dramatic arc height
+                const arcHeight = Math.max(distance * 0.5, 120);
+                const direction = entryData.isBottom ? 1 : -1;
+
+                if (entryData.isBottom === entryPositions[targetId].isBottom) {
+                    // Dramatic arc away from timeline
+                    const arcMidY = midY + (arcHeight * direction);
+                    d = `M ${startX} ${startY} Q ${midX} ${arcMidY} ${endX} ${endY}`;
+                } else {
+                    // S-curve for cross connections
+                    const controlOffset = Math.max(distance * 0.4, 80);
+                    d = `M ${startX} ${startY} C ${midX + controlOffset} ${startY}, ${midX + controlOffset} ${endY}, ${endX} ${endY}`;
+                }
+            }
 
             path.setAttribute('d', d);
             path.setAttribute('class', `connection-line ${lineType}`);
@@ -47,7 +69,6 @@ function drawConnections() {
         });
     });
 }
-
 /**
  * Calculate SVG path for connection line
  */
