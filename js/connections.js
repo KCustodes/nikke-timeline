@@ -56,14 +56,25 @@ function calculatePath(startX, startY, endX, endY, lineType, isStartBottom, isEn
         return `M ${startX} ${startY} L ${endX} ${endY}`;
     }
 
-    // Curved line
+    // Curved line with more pronounced curves
     const midX = (startX + endX) / 2;
     const midY = (startY + endY) / 2;
-    const controlOffset = Math.abs(endX - startX) * 0.3;
+    
+    // Increase the curve amplitude
+    const distance = Math.abs(endX - startX);
+    const verticalDistance = Math.abs(endY - startY);
+    
+    // Base curve offset - minimum 50px for visibility
+    const baseOffset = Math.max(distance * 0.4, 50);
+    const verticalOffset = Math.max(verticalDistance * 0.3, 30);
 
     if (isStartBottom === isEndBottom) {
-        return `M ${startX} ${startY} Q ${midX} ${midY - controlOffset} ${endX} ${endY}`;
+        // Both on same side - curve goes away from timeline
+        const direction = isStartBottom ? 1 : -1;
+        return `M ${startX} ${startY} Q ${midX} ${midY + (verticalOffset * direction)} ${endX} ${endY}`;
     } else {
-        return `M ${startX} ${startY} Q ${midX - controlOffset} ${midY} ${endX} ${endY}`;
+        // Different sides - curve swoops between them
+        const controlX = midX + baseOffset;
+        return `M ${startX} ${startY} C ${controlX} ${startY}, ${controlX} ${endY}, ${endX} ${endY}`;
     }
 }
