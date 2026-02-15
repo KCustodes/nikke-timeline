@@ -319,21 +319,24 @@ body {
 
 .connection-line {
     fill: none;
-    stroke: rgba(255, 255, 255, 0.4);
-    stroke-width: 2;
+    stroke: rgba(255, 255, 255, 0.3);
+    stroke-width: 2px;
     transition: stroke 0.3s;
-    pointer-events: none;
+}
+
+.connection-line:hover {
+    stroke: rgba(199, 125, 255, 0.8);
+    stroke-width: 3px;
 }
 
 .connection-line.curved {
-    stroke: rgba(199, 125, 255, 0.5);
+    stroke: rgba(199, 125, 255, 0.4);
 }
 
 .connection-line.straight {
-    stroke: rgba(255, 107, 107, 0.5);
-    stroke-dasharray: 8, 4;
+    stroke: rgba(78, 205, 196, 0.4);
+    stroke-dasharray: 5, 5;
 }
-
 /* Minimap */
 .minimap {
     position: fixed;
