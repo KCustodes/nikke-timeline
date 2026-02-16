@@ -19,7 +19,6 @@ const filterEra = document.getElementById('filterEra');
 const filterCharacter = document.getElementById('filterCharacter');
 const filterLocation = document.getElementById('filterLocation');
 const viewport = document.getElementById('viewport');
-const minimap = document.getElementById('minimap');
 const eraJump = document.getElementById('eraJump');
 const toast = document.getElementById('toast');
 
@@ -136,19 +135,21 @@ function render() {
             // Use entry image or placeholder
             const imgSrc = entry.image || 'https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image';
             
-            // Type indicator color
+            // Type indicator color (can be overridden by entry.color)
             const typeColors = {
                 main_story: '#ff6b6b',
                 event_story: '#4ecdc4',
                 side_mission: '#ffe66d',
                 side_story: '#a29bfe'
             };
-            const typeColor = typeColors[entry.type] || '#888';
+            
+            // Use entry.color if defined, otherwise use type color
+            const entryColor = entry.color || typeColors[entry.type] || '#888';
 
             div.innerHTML = `
                 <div class="entry-box ${isBottom ? 'bottom' : ''}">
                     <img class="entry-image" src="${imgSrc}" alt="${entry.title}" onerror="this.src='https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image'">
-                    <div class="entry-type-bar" style="background:${typeColor}"></div>
+                    <div class="entry-type-bar" style="background:${entryColor}"></div>
                 </div>
                 <span class="entry-title ${isBottom ? 'bottom' : ''}">${entry.title}</span>
             `;
@@ -163,50 +164,7 @@ function render() {
         eraIndex++;
     });
 
-    renderMinimap();
     updateFilteredIndices();
-}
-
-// ===== RENDER MINIMAP =====
-function renderMinimap() {
-    const minimapContent = document.createElement('div');
-    minimapContent.className = 'minimap-content';
-
-    const colors = {
-        main_story: '#ff6b6b',
-        event_story: '#4ecdc4',
-        side_mission: '#ffe66d',
-        side_story: '#a29bfe'
-    };
-
-    entries.forEach(entry => {
-        const dot = document.createElement('div');
-        dot.className = 'minimap-dot';
-        dot.style.background = colors[entry.type] || '#888';
-        minimapContent.appendChild(dot);
-    });
-
-    minimap.innerHTML = '';
-    minimap.appendChild(minimapContent);
-
-    const viewportIndicator = document.createElement('div');
-    viewportIndicator.className = 'minimap-viewport';
-    viewportIndicator.id = 'minimapViewport';
-    minimap.appendChild(viewportIndicator);
-
-    updateMinimapViewport();
-}
-
-// ===== UPDATE MINIMAP VIEWPORT =====
-function updateMinimapViewport() {
-    const viewportIndicator = document.getElementById('minimapViewport');
-    if (!viewportIndicator || entries.length === 0) return;
-
-    const scrollPercent = viewport.scrollLeft / (viewport.scrollWidth - viewport.clientWidth);
-    const viewportPercent = viewport.clientWidth / viewport.scrollWidth;
-
-    viewportIndicator.style.left = `${scrollPercent * 100}%`;
-    viewportIndicator.style.width = `${Math.max(viewportPercent * 100, 5)}%`;
 }
 
 // ===== UPDATE FILTERED INDICES =====
@@ -257,8 +215,17 @@ function renderModalContent(entry) {
     bookmarkBtn.textContent = isBookmarked ? '★ Bookmarked' : '☆ Add to Bookmarks';
     bookmarkBtn.classList.toggle('bookmarked', isBookmarked);
 
+    // Type colors (can be overridden by entry.color)
+    const typeColors = {
+        main_story: '#ff6b6b',
+        event_story: '#4ecdc4',
+        side_mission: '#ffe66d',
+        side_story: '#a29bfe'
+    };
+    const entryColor = entry.color || typeColors[entry.type] || '#888';
+
     let html = `
-        <div class="modal-type ${entry.type}">${typeLabel}${chapter}</div>
+        <div class="modal-type ${entry.type}" style="background: ${entryColor}22; color: ${entryColor};">${typeLabel}${chapter}</div>
         <h2>${entry.title}</h2>
         <div class="modal-meta">
     `;
@@ -291,8 +258,11 @@ function renderModalContent(entry) {
 
     html += `</div>`;
 
+    // Full image display (not cropped)
     if (entry.image) {
-        html += `<img class="modal-image" src="${entry.image}" alt="${entry.title}">`;
+        html += `<div class="modal-image-container">
+            <img class="modal-image" src="${entry.image}" alt="${entry.title}">
+        </div>`;
     }
 
     if (entry.tags && entry.tags.length) {
@@ -689,18 +659,6 @@ function setupEventListeners() {
     viewport.addEventListener('mouseup', endDrag);
     viewport.addEventListener('mouseleave', endDrag);
     viewport.addEventListener('mousemove', doDrag);
-
-    viewport.addEventListener('scroll', updateMinimapViewport);
-
-    window.addEventListener('resize', updateMinimapViewport);
-
-    window.addEventListener('hashchange', checkURLHash);
-
-    minimap.onclick = (e) => {
-        const rect = minimap.getBoundingClientRect();
-        const clickPercent = (e.clientX - rect.left) / rect.width;
-        viewport.scrollLeft = clickPercent * viewport.scrollWidth;
-    };
 }
 
 // ===== START =====
