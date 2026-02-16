@@ -206,23 +206,6 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-010",
-        type: "event_story",
-        title: "Footstep, Walk, Run Part 2 + Red Ash Epilogue",
-        era: "Post-Ark Sealing",
-        timeline: "58 - 54 BC1 (Before Chapter 1)",
-        sortOrder: -59,
-        summary: "",
-        content: "",
-        characters: ["Rapi", "Red Hood"],
-        locations: ["The Ark"],
-        tags: [""],
-        image: "images/Event Thumbnails/FWR2.png",
-        youtube: "",
-        connections: []
-    },
-
-	{
         id: "ms-pre-4",
         type: "main_story",
         title: "First Reclamation Campaign",
@@ -232,27 +215,11 @@ const ENTRIES = [
         summary: "",
         content: "NO KNOWN INFORMATION AS OF NOW",
         locations: ["Earth", "The Ark"],
-        tags: ["The Ark", "The Central Government", "Nikke", "First Reclamation War"],
+        tags: ["The Ark", "The Central Government", "First Reclamation War"],
         image: "images/Event Thumbnails/Stage.png",
         youtube: "",
         connections: []
     },
-
-	{
-        id: "ms-pre-5",
-        type: "main_story",
-        title: "Second Reclamation Campaign",
-        era: "Post-Ark Sealing",
-        timeline: "60 BC1 (Before Chapter 1)",
-        sortOrder: -60,
-        summary: "",
-        content: "NO KNOWN INFORMATION AS OF NOW",
-        locations: ["Earth", "The Ark"],
-        tags: ["The Ark", "The Central Government", "Nikke", "Second Reclamation War"],
-        image: "images/Event Thumbnails/Stage.png",
-        youtube: "",
-        connections: []
-    },	
 
 	{
         id: "ss-001",
@@ -270,6 +237,40 @@ const ENTRIES = [
         youtube: "",
         connections: []
     },
+	
+	{
+        id: "ms-pre-5",
+        type: "main_story",
+        title: "Second Reclamation Campaign",
+        era: "Post-Ark Sealing",
+        timeline: "60 BC1 (Before Chapter 1)",
+        sortOrder: -60,
+        summary: "",
+        content: "NO KNOWN INFORMATION AS OF NOW",
+        locations: ["Earth", "The Ark"],
+        tags: ["The Ark", "The Central Government", "Second Reclamation War"],
+        image: "images/Event Thumbnails/Stage.png",
+        youtube: "",
+        connections: []
+    },
+	
+	{
+        id: "es-010",
+        type: "event_story",
+        title: "Footstep, Walk, Run Part 2 + Red Ash Epilogue",
+        era: "Post-Ark Sealing",
+        timeline: "58 - 54 BC1 (Before Chapter 1)",
+        sortOrder: -59,
+        summary: "",
+        content: "",
+        characters: ["Rapi", "Red Hood"],
+        locations: ["The Ark"],
+        tags: [""],
+        image: "images/Event Thumbnails/FWR2.png",
+        youtube: "",
+        connections: []
+    },
+
     // === CHAPTER 0 (Year 0, Starting Point) ===
     {
         id: "ms-000",
