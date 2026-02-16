@@ -101,7 +101,7 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-004",
+        id: "es-009",
         type: "event_story",
         title: "Red Ash Epilogue",
         era: "Post-Ark Sealing",
@@ -188,7 +188,7 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-009",
+        id: "es-004",
         type: "event_story",
         title: "Over Zone",
         era: "Post-Ark Sealing",
