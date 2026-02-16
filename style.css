@@ -135,7 +135,7 @@ body {
     top: 160px;
     left: 0;
     right: 0;
-    bottom: 60px;
+    bottom: 30px;
     overflow-x: auto;
     overflow-y: hidden;
     cursor: grab;
@@ -192,48 +192,44 @@ body {
     min-width: max-content;
 }
 
-/* Era background image */
+/* Era background image - brighter default */
 .era-group::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -150px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: -150px;
     background-image: var(--era-bg-image, none);
     background-size: cover;
     background-position: center;
-    opacity: 0;
+    opacity: 0.35;
     transition: opacity 0.4s ease;
     z-index: -2;
     border-radius: 12px;
 }
 
+/* Era background image - brighter on hover */
 .era-group:hover::before {
-    opacity: 0.15;
+    opacity: 0.6;
 }
 
-/* Era background overlay */
+/* Era background overlay - lighter */
 .era-bg-overlay {
     position: absolute;
-    top: 0;
+    top: -150px;
     left: 0;
     right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, #0d0d1a 0%, transparent 20%, transparent 80%, #0d0d1a 100%);
+    bottom: -150px;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(13, 13, 26, 0.6) 100%);
     z-index: -1;
     pointer-events: none;
     border-radius: 12px;
+    transition: all 0.4s ease;
 }
 
 .era-group:hover .era-bg-overlay {
-    background: linear-gradient(90deg, 
-        rgba(13, 13, 26, 0.95) 0%, 
-        rgba(13, 13, 26, 0.7) 15%, 
-        rgba(13, 13, 26, 0.5) 50%,
-        rgba(13, 13, 26, 0.7) 85%, 
-        rgba(13, 13, 26, 0.95) 100%
-    );
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(13, 13, 26, 0.4) 100%);
 }
 
 /* Era label */
@@ -250,21 +246,22 @@ body {
     z-index: 5;
 }
 
-/* Era divider */
+/* Era divider - longer */
 .era-divider {
     position: absolute;
     right: 0;
-    top: -100px;
-    bottom: -100px;
+    top: -200px;
+    bottom: -200px;
     width: 2px;
     background: linear-gradient(180deg, 
         transparent 0%, 
-        rgba(199, 125, 255, 0.4) 20%, 
+        rgba(199, 125, 255, 0.3) 10%, 
         rgba(199, 125, 255, 0.6) 50%, 
-        rgba(199, 125, 255, 0.4) 80%, 
+        rgba(199, 125, 255, 0.3) 90%, 
         transparent 100%
     );
     z-index: 10;
+    box-shadow: 0 0 10px rgba(199, 125, 255, 0.3);
 }
 
 /* ===== ENTRY ===== */
@@ -439,54 +436,6 @@ body {
     box-shadow: 0 0 25px rgba(78, 205, 196, 0.4);
 }
 
-/* ===== MINIMAP ===== */
-.minimap {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    max-width: 600px;
-    height: 30px;
-    background: rgba(20, 20, 35, 0.9);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 50;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.minimap-content {
-    display: flex;
-    gap: 2px;
-    padding: 5px;
-    height: 100%;
-    align-items: center;
-}
-
-.minimap-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-}
-
-.minimap-dot:hover {
-    transform: scale(1.5);
-}
-
-.minimap-viewport {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background: rgba(199, 125, 255, 0.2);
-    border: 1px solid rgba(199, 125, 255, 0.4);
-    border-radius: 15px;
-    pointer-events: none;
-    min-width: 10px;
-}
-
 /* ===== MODAL ===== */
 .modal {
     position: fixed;
@@ -631,12 +580,21 @@ body {
     text-decoration: underline;
 }
 
+/* Modal image container - shows full image */
+.modal-image-container {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+}
+
 .modal-image {
     width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
 }
 
 .modal-tags {
@@ -823,7 +781,7 @@ body {
 /* ===== LEGEND ===== */
 .legend {
     position: fixed;
-    bottom: 55px;
+    bottom: 15px;
     right: 20px;
     display: flex;
     gap: 15px;
@@ -851,7 +809,7 @@ body {
 /* ===== TOAST ===== */
 .toast {
     position: fixed;
-    bottom: 80px;
+    bottom: 60px;
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     background: rgba(199, 125, 255, 0.9);
@@ -913,10 +871,6 @@ body {
         right: 10px;
         left: 10px;
         justify-content: center;
-    }
-
-    .minimap {
-        width: 90%;
     }
 
     .modal-content {
