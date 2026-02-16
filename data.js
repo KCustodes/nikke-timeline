@@ -1041,7 +1041,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 41"],
-        image: "",
+        image: "images/Chapter Thumbnails/EventScene_Chap_41_06.webp",
         youtube: "",
         connections: []
 	},
@@ -1059,7 +1059,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 42"],
-        image: "",
+        image: "images/Chapter Thumbnails/EventScene_Chap_42_09.webp",
         youtube: "",
         connections: []
 	},
@@ -1077,7 +1077,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 43"],
-        image: "",
+        image: "images/Chapter Thumbnails/EventScene_Chap_43_02_4.webp",
         youtube: "",
         connections: []
 	},
@@ -1095,7 +1095,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 44"],
-        image: "",
+        image: "images/Chapter Thumbnails/EventScene_Chap_44_04.webp",
         youtube: "",
         connections: []
 	},
