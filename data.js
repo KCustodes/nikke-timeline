@@ -167,7 +167,108 @@ const ENTRIES = [
         youtube: "",
         connections: []
     },
-    
+
+	{
+        id: "es-008",
+        type: "event_story",
+        title: "Old Tales Epilogue",
+        era: "Post-Ark Sealing",
+        timeline: "91 - 74 BC1 (Before Chapter 1)",
+        sortOrder: -91,
+        summary: "",
+        content: "",
+        characters: ["Cinderella", "Abe", "Nihilister"],
+        locations: ["Earth", "The Ark"],
+        tags: ["Old Tales Squad", "The Central Government"],
+        image: "images/Event Thumbnails/OT EP.png",
+        youtube: "",
+        connections: [
+			{ target: "es-006", type: "curved" }
+		]
+    },
+
+	{
+        id: "es-009",
+        type: "event_story",
+        title: "Footstep, Walk, Run Part 1",
+        era: "Post-Ark Sealing",
+        timeline: "89? - 58 BC1 (Before Chapter 1)",
+        sortOrder: -90,
+        summary: "",
+        content: "",
+        characters: ["Rapi", "Red Hood"],
+        locations: ["The Ark"],
+        tags: [""],
+        image: "images/Event Thumbnails/FWR1.png",
+        youtube: "",
+        connections: []
+    },
+
+	{
+        id: "es-010",
+        type: "event_story",
+        title: "Footstep, Walk, Run Part 2 + Red Ash Epilogue",
+        era: "Post-Ark Sealing",
+        timeline: "58 - 54 BC1 (Before Chapter 1)",
+        sortOrder: -59,
+        summary: "",
+        content: "",
+        characters: ["Rapi", "Red Hood"],
+        locations: ["The Ark"],
+        tags: [""],
+        image: "images/Event Thumbnails/FWR2.png",
+        youtube: "",
+        connections: []
+    },
+
+	{
+        id: "ms-pre-4",
+        type: "main_story",
+        title: "First Reclamation Campaign",
+        era: "Post-Ark Sealing",
+        timeline: "89? - 80? BC1 (Before Chapter 1)",
+        sortOrder: -89,
+        summary: "",
+        content: "NO KNOWN INFORMATION AS OF NOW",
+        locations: ["Earth", "The Ark"],
+        tags: ["The Ark", "The Central Government", "Nikke", "First Reclamation War"],
+        image: "images/Event Thumbnails/Stage.png",
+        youtube: "",
+        connections: []
+    },
+
+	{
+        id: "ms-pre-5",
+        type: "main_story",
+        title: "Second Reclamation Campaign",
+        era: "Post-Ark Sealing",
+        timeline: "60 BC1 (Before Chapter 1)",
+        sortOrder: -60,
+        summary: "",
+        content: "NO KNOWN INFORMATION AS OF NOW",
+        locations: ["Earth", "The Ark"],
+        tags: ["The Ark", "The Central Government", "Nikke", "Second Reclamation War"],
+        image: "images/Event Thumbnails/Stage.png",
+        youtube: "",
+        connections: []
+    },	
+
+	{
+        id: "ss-001",
+        type: "side_story",
+        title: "Mudfish",
+        era: "Post-Ark Sealing",
+        timeline: "91 - 70 BC1 (Before Chapter 1)",
+        sortOrder: -87,
+        summary: "",
+        content: "",
+        characters: ["Siren", "Leviathan"],
+        locations: ["Earth"],
+        tags: ["Old Tales Squad", "Dark Matter"],
+        image: "images/Event Thumbnails/Mudfish.png",
+        youtube: "",
+        connections: []
+    },
     // === CHAPTER 0 (Year 0, Starting Point) ===
     {
         id: "ms-000",
