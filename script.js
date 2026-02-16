@@ -258,11 +258,9 @@ function renderModalContent(entry) {
 
     html += `</div>`;
 
-    // Full image display (not cropped)
+    // Full image display
     if (entry.image) {
-        html += `<div class="modal-image-container">
-            <img class="modal-image" src="${entry.image}" alt="${entry.title}">
-        </div>`;
+    html += `<img class="modal-image" src="${entry.image}" alt="${entry.title}">`;
     }
 
     if (entry.tags && entry.tags.length) {
