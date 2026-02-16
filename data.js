@@ -99,26 +99,9 @@ const ENTRIES = [
         youtube: "",
         connections: []
     },
-
-	{
-        id: "es-009",
-        type: "event_story",
-        title: "Red Ash Epilogue",
-        era: "Post-Ark Sealing",
-        timeline: "58 BC1 (Before Chapter 1)",
-        sortOrder: -91,
-        summary: "",
-        content: "",
-        characters: ["Cinderella", "Abe", "Red Shoes", "Siren", "Hansel", "Gretel", "Oswald", "The Rapture Queen", "Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
-        locations: ["Earth"],
-        tags: ["Old Tales Squad", "Goddess Squad", "U.F.H.", "V.T.C.", "The Central Government", "The Rapture Queen"],
-        image: "images/Event Thumbnails/FWR2.png",
-        youtube: "",
-        connections: []
-    },
 	
 	{
-        id: "es-005",
+        id: "es-004",
         type: "event_story",
         title: "Ark Guardian Part 1",
         era: "The First Invasion",
@@ -135,7 +118,7 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-006",
+        id: "es-005",
         type: "event_story",
         title: "Old Tales Part 2",
         era: "The First Invasion",
@@ -152,7 +135,7 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-007",
+        id: "es-006",
         type: "event_story",
         title: "Old Tales Epilogue",
         era: "Post-Ark Sealing",
@@ -171,7 +154,7 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-008",
+        id: "es-007",
         type: "event_story",
         title: "Ark Guardian Part 2",
         era: "The First Invasion",
@@ -188,7 +171,7 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-004",
+        id: "es-008",
         type: "event_story",
         title: "Over Zone",
         era: "Post-Ark Sealing",
@@ -205,7 +188,7 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-010",
+        id: "es-009",
         type: "event_story",
         title: "Footstep, Walk, Run Part 1",
         era: "Post-Ark Sealing",
@@ -222,9 +205,9 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-011",
+        id: "es-010",
         type: "event_story",
-        title: "Footstep, Walk, Run Part 2",
+        title: "Footstep, Walk, Run Part 2 + Red Ash Epilogue",
         era: "Post-Ark Sealing",
         timeline: "58 - 54 BC1 (Before Chapter 1)",
         sortOrder: -59,
