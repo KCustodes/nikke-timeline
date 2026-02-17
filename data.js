@@ -286,7 +286,7 @@ const ENTRIES = [
         characters: ["The Commander", "Marian", "Rapi", "Anis", "Shifty"],
         locations: ["Earth"],
         tags: ["Chapter 0"],
-        image: "images/Chapter Thumbnails/img_album_chapter00.png",
+        image: "images/Chapter Thumbnails/Chapter 0.png",
         youtube: "",
         connections: []
     },
@@ -305,7 +305,7 @@ const ENTRIES = [
         characters: ["The Commander", "Marian", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid"],
         locations: ["Earth", "The Ark"],
         tags: ["Chapter 1"],
-        image: "images/Chapter Thumbnails/img_album_chapter01.png",
+        image: "images/Chapter Thumbnails/Chapter 1.png",
         youtube: "",
         connections: []
     },
@@ -323,7 +323,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 2"],
-        image: "images/Chapter Thumbnails/img_album_chapter02.png",
+        image: "images/Chapter Thumbnails/Chapter 2.png",
         youtube: "",
         connections: []
     },
@@ -341,7 +341,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 3"],
-        image: "images/Chapter Thumbnails/img_album_chapter03.png",
+        image: "images/Chapter Thumbnails/Chapter 3.png",
         youtube: "",
         connections: []
 	},
@@ -359,7 +359,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 4"],
-        image: "images/Chapter Thumbnails/img_album_chapter04.png",
+        image: "images/Chapter Thumbnails/Chapter 4.png",
         youtube: "",
         connections: []
 	},
@@ -377,7 +377,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 5"],
-        image: "images/Chapter Thumbnails/img_album_chapter05.png",
+        image: "images/Chapter Thumbnails/Chapter 5.png",
         youtube: "",
         connections: []
 	},
@@ -395,7 +395,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 6"],
-        image: "images/Chapter Thumbnails/img_album_chapter06.png",
+        image: "images/Chapter Thumbnails/Chapter 6.png",
         youtube: "",
         connections: []
 	},
@@ -413,7 +413,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 7"],
-        image: "images/Chapter Thumbnails/img_album_chapter07.png",
+        image: "images/Chapter Thumbnails/Chapter 7.png",
         youtube: "",
         connections: []
 	},
@@ -431,7 +431,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 8"],
-        image: "images/Chapter Thumbnails/img_album_chapter08.png",
+        image: "images/Chapter Thumbnails/Chapter 8.png",
         youtube: "",
         connections: []
 	},
@@ -449,7 +449,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 9"],
-        image: "images/Chapter Thumbnails/img_album_chapter09.png",
+        image: "images/Chapter Thumbnails/Chapter 9.png",
         youtube: "",
         connections: []
 	},
@@ -467,7 +467,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 10"],
-        image: "images/Chapter Thumbnails/img_album_chapter10.png",
+        image: "images/Chapter Thumbnails/Chapter 10.png",
         youtube: "",
         connections: []
 	},
@@ -485,7 +485,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 11"],
-        image: "images/Chapter Thumbnails/img_album_chapter11.png",
+        image: "images/Chapter Thumbnails/Chapter 11.png",
         youtube: "",
         connections: []
 	},
@@ -503,7 +503,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 12"],
-        image: "images/Chapter Thumbnails/img_album_chapter12.png",
+        image: "images/Chapter Thumbnails/Chapter 12.png",
         youtube: "",
         connections: []
 	},
@@ -521,7 +521,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 13"],
-        image: "images/Chapter Thumbnails/img_album_chapter13.png",
+        image: "images/Chapter Thumbnails/Chapter 13.png",
         youtube: "",
         connections: []
 	},
@@ -539,7 +539,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 14"],
-        image: "images/Chapter Thumbnails/img_album_chapter14.png",
+        image: "images/Chapter Thumbnails/chapter 14.png",
         youtube: "",
         connections: []
 	},
@@ -557,7 +557,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 15"],
-        image: "images/Chapter Thumbnails/img_album_chapter15.png",
+        image: "images/Chapter Thumbnails/Chapter 15.png",
         youtube: "",
         connections: []
 	},
@@ -575,7 +575,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 16"],
-        image: "images/Chapter Thumbnails/img_album_chapter16.png",
+        image: "images/Chapter Thumbnails/Chapter 16.png",
         youtube: "",
         connections: []
 	},
@@ -593,7 +593,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 17"],
-        image: "images/Chapter Thumbnails/img_album_chapter17.png",
+        image: "images/Chapter Thumbnails/Chapter 17.png",
         youtube: "",
         connections: []
 	},
@@ -611,7 +611,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 18"],
-        image: "images/Chapter Thumbnails/img_album_chapter18.png",
+        image: "images/Chapter Thumbnails/Chapter 18.png",
         youtube: "",
         connections: []
 	},
@@ -629,7 +629,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 19"],
-        image: "images/Chapter Thumbnails/img_album_chapter19.png",
+        image: "images/Chapter Thumbnails/Chapter 19.png",
         youtube: "",
         connections: []
 	},
@@ -647,7 +647,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 20"],
-        image: "images/Chapter Thumbnails/img_album_chapter20.png",
+        image: "images/Chapter Thumbnails/Chapter 20.png",
         youtube: "",
         connections: []
 	},
@@ -665,7 +665,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 21"],
-        image: "images/Chapter Thumbnails/img_album_chapter21.png",
+        image: "images/Chapter Thumbnails/Chapter 21.png",
         youtube: "",
         connections: []
 	},
@@ -683,7 +683,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 22"],
-        image: "images/Chapter Thumbnails/img_album_chapter22.png",
+        image: "images/Chapter Thumbnails/Chapter 22.png",
         youtube: "",
         connections: []
 	},
@@ -701,7 +701,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 23"],
-        image: "images/Chapter Thumbnails/img_album_chapter23.png",
+        image: "images/Chapter Thumbnails/Chapter 23.png",
         youtube: "",
         connections: []
 	},
@@ -719,7 +719,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 24"],
-        image: "images/Chapter Thumbnails/img_album_chapter24.png",
+        image: "images/Chapter Thumbnails/Chapter 24.png",
         youtube: "",
         connections: []
 	},
@@ -737,7 +737,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 25"],
-        image: "images/Chapter Thumbnails/img_album_chapter25.png",
+        image: "images/Chapter Thumbnails/Chapter 25.png",
         youtube: "",
         connections: []
 	},
@@ -755,7 +755,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 26"],
-        image: "images/Chapter Thumbnails/img_album_chapter26.png",
+        image: "images/Chapter Thumbnails/Chapter 26.png",
         youtube: "",
         connections: []
 	},
@@ -773,7 +773,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 27"],
-        image: "images/Chapter Thumbnails/img_album_chapter27.png",
+        image: "images/Chapter Thumbnails/Chapter 27.png",
         youtube: "",
         connections: []
 	},
@@ -791,7 +791,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 28"],
-        image: "images/Chapter Thumbnails/img_album_chapter28.png",
+        image: "images/Chapter Thumbnails/Chapter 28.png",
         youtube: "",
         connections: []
 	},
@@ -809,7 +809,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 29"],
-        image: "images/Chapter Thumbnails/img_album_chapter29.png",
+        image: "images/Chapter Thumbnails/Chapter 29.png",
         youtube: "",
         connections: []
 	},
@@ -827,7 +827,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 30"],
-        image: "images/Chapter Thumbnails/img_album_chapter30.png",
+        image: "images/Chapter Thumbnails/Chapter 30.png",
         youtube: "",
         connections: []
 	},
@@ -845,7 +845,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 31"],
-        image: "images/Chapter Thumbnails/img_album_chapter31.png",
+        image: "images/Chapter Thumbnails/Chapter 31.png",
         youtube: "",
         connections: []
 	},
@@ -863,7 +863,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 32"],
-        image: "images/Chapter Thumbnails/img_album_chapter32.png",
+        image: "images/Chapter Thumbnails/Chapter 32.png",
         youtube: "",
         connections: []
 	},
@@ -881,7 +881,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 33"],
-        image: "images/Chapter Thumbnails/img_album_chapter33.png",
+        image: "images/Chapter Thumbnails/Chapter 33.png",
         youtube: "",
         connections: []
 	},
@@ -899,7 +899,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 34"],
-        image: "images/Chapter Thumbnails/img_album_chapter34.png",
+        image: "images/Chapter Thumbnails/Chapter 34.png",
         youtube: "",
         connections: []
 	},
@@ -917,7 +917,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 35"],
-        image: "images/Chapter Thumbnails/img_album_chapter35.png",
+        image: "images/Chapter Thumbnails/Chapter 35.png",
         youtube: "",
         connections: []
 	},
@@ -935,7 +935,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 36"],
-        image: "images/Chapter Thumbnails/img_album_chapter36.png",
+        image: "images/Chapter Thumbnails/Chapter 36.png",
         youtube: "",
         connections: []
 	},
@@ -953,7 +953,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 37"],
-        image: "images/Chapter Thumbnails/img_album_chapter37.png",
+        image: "images/Chapter Thumbnails/Chapter 37.png",
         youtube: "",
         connections: []
 	},
@@ -971,7 +971,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 38"],
-        image: "images/Chapter Thumbnails/img_album_chapter38.png",
+        image: "images/Chapter Thumbnails/Chapter 38.png",
         youtube: "",
         connections: []
 	},
@@ -989,7 +989,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 39"],
-        image: "images/Chapter Thumbnails/img_album_chapter39.png",
+        image: "images/Chapter Thumbnails/Chapter 39.png",
         youtube: "",
         connections: []
 	},
@@ -1007,7 +1007,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 40"],
-        image: "images/Chapter Thumbnails/img_album_chapter40.png",
+        image: "images/Chapter Thumbnails/Chapter 40.png",
         youtube: "",
         connections: []
 	},
