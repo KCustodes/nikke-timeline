@@ -539,7 +539,7 @@ const ENTRIES = [
         characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Syuen", "Yuni", "Mihara"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 14"],
-        image: "images/Chapter Thumbnails/chapter 14.png",
+        image: "images/Chapter Thumbnails/Chapter 14.png",
         youtube: "",
         connections: []
 	},
