@@ -79,7 +79,7 @@ const ENTRIES = [
         characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
         locations: ["Earth"],
         tags: ["Goddess Squad"],
-        image: "",
+        image: "images/Event Logos/Nonsense_Red_logo.webp",
         youtube: "",
         connections: []
     },
