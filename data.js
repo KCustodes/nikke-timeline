@@ -70,10 +70,27 @@ const ENTRIES = [
 	{
         id: "es-002",
         type: "event_story",
+        title: "Nonsense Red",
+        era: "The First Invasion",
+        timeline: "99 - 96 BC1 (Before Chapter 1)",
+        sortOrder: -97,
+        summary: "",
+        content: "<ul><li>Set around shortly before and the same time as Red Ash.</li><li>Cinderella, Red Shoes, Siren, Hansel and Gretel are all created by Abe, a renowned V.T.C. scientist.</li><li>Raptures are being created faster than being killed, the projected number of Raptures on Earth during that time was read as 'infinite'.</li><li>A Sin-Class Rapture called Gluttony was the one responsible for swallowing an ICBM and spitting it back out. Also it shortly died afterwards due to the amount of power unleashed. <em>(Based off Unbreakable Sphere we've learned that Gluttony is a Rapture with many 'mouths', so what swallowed the ICBM was not it's true body but more of like an appendage.)</em></li><li>With the U.F.H. and V.T.C. satisfied with their test results, they order Cinderella to be deployed with the Goddess Squad for a joint operation to attack the Lift to the Space Station.</li><li>Before the operation begins, Cinderella becomes corrupted and proceeds to destroy the facility and attempts to kill off her other squad members. Following this, she then ambushes the Goddess Squad during their operation to attack the Lift.</li><li>2 Months pass since Cinderella was corrupted and Abe has successfully repaired Red Shoes, Siren, Hansel and Gretel by using their spare bodies while hiding from the Raptures attacking the facility.</li><li>Cinderella is officially known as the 1st Heretic Anachiro and branded as a traitor.</li><li>Red Shoes calls for help without Abe's knowledge and Oswald responds as well as brings a small detachment of soldiers. He states that they are under suspicion as traitors and will need to undergo a brain scan along to prove their innocence. Oswald also comments that Hansel and Gretel shouldn't exist, which is reveal that Abe most likely made them in secret.</li><li>Abe, Red Shoes, Siren, Hansel and Gretel successfully escape from Oswald and pursue Anachiro. In an attempt to subdue her, they ultimately fail and Anachiro defeats them all. She then goes after the Goddess Squad which leads into the events of Red Ash's ending.</li></ul>",
+        characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
+        locations: ["Earth"],
+        tags: ["Goddess Squad"],
+        image: "",
+        youtube: "",
+        connections: []
+    },
+	
+	{
+        id: "es-003",
+        type: "event_story",
         title: "Old Tales Part 1",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -97,
+        sortOrder: -96,
         summary: "",
         content: "<ul><li>Set around shortly before and the same time as Red Ash.</li><li>Cinderella, Red Shoes, Siren, Hansel and Gretel are all created by Abe, a renowned V.T.C. scientist.</li><li>Raptures are being created faster than being killed, the projected number of Raptures on Earth during that time was read as 'infinite'.</li><li>A Sin-Class Rapture called Gluttony was the one responsible for swallowing an ICBM and spitting it back out. Also it shortly died afterwards due to the amount of power unleashed. <em>(Based off Unbreakable Sphere we've learned that Gluttony is a Rapture with many 'mouths', so what swallowed the ICBM was not it's true body but more of like an appendage.)</em></li><li>With the U.F.H. and V.T.C. satisfied with their test results, they order Cinderella to be deployed with the Goddess Squad for a joint operation to attack the Lift to the Space Station.</li><li>Before the operation begins, Cinderella becomes corrupted and proceeds to destroy the facility and attempts to kill off her other squad members. Following this, she then ambushes the Goddess Squad during their operation to attack the Lift.</li><li>2 Months pass since Cinderella was corrupted and Abe has successfully repaired Red Shoes, Siren, Hansel and Gretel by using their spare bodies while hiding from the Raptures attacking the facility.</li><li>Cinderella is officially known as the 1st Heretic Anachiro and branded as a traitor.</li><li>Red Shoes calls for help without Abe's knowledge and Oswald responds as well as brings a small detachment of soldiers. He states that they are under suspicion as traitors and will need to undergo a brain scan along to prove their innocence. Oswald also comments that Hansel and Gretel shouldn't exist, which is reveal that Abe most likely made them in secret.</li><li>Abe, Red Shoes, Siren, Hansel and Gretel successfully escape from Oswald and pursue Anachiro. In an attempt to subdue her, they ultimately fail and Anachiro defeats them all. She then goes after the Goddess Squad which leads into the events of Red Ash's ending.</li></ul>",
         characters: ["Cinderella", "Abe", "Red Shoes", "Siren", "Hansel", "Gretel", "Oswald", "Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
@@ -85,12 +102,12 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-003",
+        id: "es-004",
         type: "event_story",
         title: "Red Ash",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -96,
+        sortOrder: -95,
         summary: "",
         content: "<p><strong>PART 1:</strong></p><ul><li>Takes place 4 years since the Raptures invaded.</li><li>2 years since occasional victories started happening and The United Forces of Humanity started winning more often.</li><li>The most recent addition to the Goddess Squad is Scarlet based off the events of New Year, New Sword.</li><li>During the event, Red Hood is in her post-corruption stages.</li><li>Although the Goddess Squad has achieved victories, other military units have suffered substantial losses and an all-out offensive would be suicide for humanity.</li><li>The ability to mass-produce Nikkes is in the final stages of development and only 200 were made without defects within the last year.</li><li>The Rapture Storm Bringer has already left an impact for air support units.</li><li>Corruption is already well known throughout the war but Red Shoe's variant has significantly impacted Nikkes and left an impression on how devastating it can be. <em>(Old Tales Part 2)</em></li><li>Rapunzel, with the help of V.T.C., begin attempts to cure Red Hood's corruption but with no success.</li><li>The operation to attack the Space Station is underway and the Goddess Squad head to Elysion's 3rd Research Lab to meet up with Cinderella.</li><li>Upon entering the Lab, the facility is in shambles due to being besieged by Raptures. Two 2nd Gen Grimms models are destroyed and Cinderella is missing.</li><li>The Legendary Commander and Liliweiss also discover an amalgamation of Nikke and Rapture that's fused together and deduce that the Raptures initiated this experiment.</li><li>With Cinderella missing, the Goddess Squad is then instructed to go ahead and attack the Lift to the Space Station. As they defeat the surrounding Raptures and ascend the Lift, Cinderella ambushes them and the Goddess Squad narrowly retreats.</li><li>Due to the operation resulting in a failure, humanity begins their retreat into the Ark.</li></ul><p><strong>PART 2:</strong></p><ul><li>Begins roughly 2 months after the battle of the Lift and Red Hood leaving the squad.</li><li>The U.F.H. and the V.T.C. have merged to become The Central Government.</li><li>Cryogenic Sleep is hypothesized to help deter corruption from spreading but it's efficiency is still questionable during this time.</li><li>While wandering the wasteland, Red Hood meets with Oswald and asks to hitchhike on her way to her destination.</li><li>As Oswald and Red Hood travel, a nearby Rapture attack prompts Red Hood to intervene. After successfully rescuing some survivors, Red Hood begins to succumb to corruption but manages to hold off the effects. A little girl named Freesia makes an appearance before heading to the Ark with the other survivors. Red Hood and Oswald share a small bonding moment before they part ways.</li><li>As the Goddess Squad assists with evacuation skirmishes to the Ark, The Legendary Commander and Liliweiss are called back to Central Government Command.</li><li>Red Hood struggles to maintain herself as the corruption begins to take hold, but she successfully staves off the effects and makes her way back to the Goddess Squad to help with protecting the Ark.</li><li>With the absence of both The Legendary Commander and Liliweiss, the Goddess Squad resumes operations of protecting the entrance to the Ark.</li><li>Anachiro unleashes her attack against the Goddess Squad but Red Hood reinforces them, resulting in them claiming victory and Anachiro being defeated.</li><li>After their victory, Red Hood parts ways with the Goddess Squad for good.</li></ul>",
         characters: ["Cinderella", "Oswald", "Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Red Hood"],
@@ -102,12 +119,12 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-004",
+        id: "es-005",
         type: "event_story",
         title: "Ark Guardian Part 1",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -95,
+        sortOrder: -94,
         summary: "",
         content: "",
         characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald", "Freesia"],
@@ -119,12 +136,12 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-005",
+        id: "es-006",
         type: "event_story",
         title: "Old Tales Part 2",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -94,
+        sortOrder: -93,
         summary: "",
         content: "",
         characters: ["Cinderella", "Abe", "Red Shoes", "Siren", "Hansel", "Gretel", "Oswald", "The Rapture Queen"],
@@ -136,12 +153,12 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-006",
+        id: "es-007",
         type: "event_story",
         title: "Ark Guardian Part 2",
         era: "The First Invasion",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -93,
+        sortOrder: -92,
         summary: "",
         content: "",
         characters: ["Liliweiss", "Andersen", "Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald", "Freesia", "Mirror", "Liberalio"],
@@ -153,12 +170,12 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-007",
+        id: "es-008",
         type: "event_story",
         title: "Over Zone",
         era: "Post-Ark Sealing",
         timeline: "96 BC1 (Before Chapter 1)",
-        sortOrder: -92,
+        sortOrder: -91,
         summary: "",
         content: "",
         characters: ["Snow White", "Scarlet", "Rapunzel", "Dorothy", "Pinne", "Oswald"],
@@ -170,12 +187,12 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-008",
+        id: "es-009",
         type: "event_story",
         title: "Old Tales Epilogue",
         era: "Post-Ark Sealing",
         timeline: "91 - 74 BC1 (Before Chapter 1)",
-        sortOrder: -91,
+        sortOrder: -90,
         summary: "",
         content: "",
         characters: ["Cinderella", "Abe", "Nihilister"],
@@ -189,12 +206,12 @@ const ENTRIES = [
     },
 
 	{
-        id: "es-009",
+        id: "es-010",
         type: "event_story",
         title: "Footstep, Walk, Run Part 1",
         era: "Post-Ark Sealing",
         timeline: "89? - 58 BC1 (Before Chapter 1)",
-        sortOrder: -90,
+        sortOrder: -89,
         summary: "",
         content: "",
         characters: ["Rapi", "Red Hood"],
@@ -211,7 +228,7 @@ const ENTRIES = [
         title: "First Reclamation Campaign",
         era: "Post-Ark Sealing",
         timeline: "89? - 80? BC1 (Before Chapter 1)",
-        sortOrder: -89,
+        sortOrder: -88,
         summary: "",
         content: "NO KNOWN INFORMATION AS OF NOW",
         locations: ["Earth", "The Ark"],
@@ -255,7 +272,7 @@ const ENTRIES = [
     },
 	
 	{
-        id: "es-010",
+        id: "es-011",
         type: "event_story",
         title: "Footstep, Walk, Run Part 2 + Red Ash Epilogue",
         era: "Post-Ark Sealing",
