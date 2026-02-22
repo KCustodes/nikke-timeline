@@ -4,6 +4,7 @@ let lostRelics = [];
 let sideMissions = [];
 let secondaryEntries = [];
 let allEntries = [];
+let allEras = [];
 let currentEntryIndex = 0;
 let filteredIndices = [];
 let bookmarks = JSON.parse(localStorage.getItem('timelineBookmarks') || '[]');
@@ -14,6 +15,7 @@ let scrollLeft = 0;
 
 // ===== DOM ELEMENTS =====
 const timelinesContainer = document.getElementById('timelinesContainer');
+const eraBackgrounds = document.getElementById('eraBackgrounds');
 const mainTimeline = document.getElementById('mainTimeline');
 const lostRelicsTimeline = document.getElementById('lostRelicsTimeline');
 const sideMissionsTimeline = document.getElementById('sideMissionsTimeline');
@@ -37,13 +39,24 @@ const typeColors = {
     lost_relic: '#ff9f43'
 };
 
+// ===== ERA ORDER (define your era order here) =====
+const eraOrder = [
+    "Age of Dawn",
+    "Era of Conflict",
+    "Golden Age",
+    "Age of Shadows"
+    // Add your eras in order
+];
+
 // ===== INITIALIZE =====
 function init() {
-    // Separate entries by type
     separateEntries();
+    extractEras();
     populateFilters();
     renderAllTimelines();
+    renderEraBackgrounds();
     setupEventListeners();
+    setupEraHoverDetection();
     checkURLHash();
 }
 
@@ -63,6 +76,35 @@ function separateEntries() {
             secondaryEntries.push(entry);
         } else {
             mainEntries.push(entry);
+        }
+    });
+}
+
+function extractEras() {
+    allEras = [];
+    const eraMap = new Map();
+
+    allEntries.forEach(entry => {
+        if (entry.era && !eraMap.has(entry.era)) {
+            eraMap.set(entry.era, {
+                name: entry.era,
+                image: entry.eraImage || entry.image || null,
+                startOrder: entry.sortOrder !== undefined ? entry.sortOrder : (entry.year || 0)
+            });
+        }
+    });
+
+    // Sort by defined order or by startOrder
+    eraOrder.forEach(eraName => {
+        if (eraMap.has(eraName)) {
+            allEras.push(eraMap.get(eraName));
+        }
+    });
+
+    // Add any eras not in the defined order
+    eraMap.forEach((era, name) => {
+        if (!allEras.find(e => e.name === name)) {
+            allEras.push(era);
         }
     });
 }
@@ -94,11 +136,145 @@ function populateFilters() {
         filterLocation.innerHTML += `<option value="${loc}">${loc}</option>`;
     });
 
-    // Era jump buttons
     eraJump.innerHTML = '<span>Jump to Era:</span>';
-    eras.forEach(era => {
-        eraJump.innerHTML += `<button data-era="${era}">${era}</button>`;
+    allEras.forEach(era => {
+        eraJump.innerHTML += `<button data-era="${era.name}">${era.name}</button>`;
     });
+}
+
+// ===== RENDER ERA BACKGROUNDS =====
+function renderEraBackgrounds() {
+    eraBackgrounds.innerHTML = '';
+
+    if (allEras.length === 0) return;
+
+    // Calculate positions based on sort order
+    const allSortedEntries = [...allEntries].sort((a, b) => {
+        const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
+        const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
+        return orderA - orderB;
+    });
+
+    // Calculate total width and era positions
+    const itemWidth = 170; // Approximate width per item including margin
+    const padding = 100;
+    const labelWidth = 120;
+    
+    let currentX = padding + labelWidth;
+    let eraPositions = [];
+
+    // Group entries by era and calculate positions
+    const eraGroups = {};
+    allSortedEntries.forEach(entry => {
+        if (!entry.era) return;
+        if (!eraGroups[entry.era]) {
+            eraGroups[entry.era] = [];
+        }
+        eraGroups[entry.era].push(entry);
+    });
+
+    // Calculate era boundaries
+    let eraStartX = currentX;
+    let currentEra = null;
+
+    allSortedEntries.forEach((entry, index) => {
+        if (entry.era !== currentEra) {
+            if (currentEra !== null) {
+                eraPositions.push({
+                    name: currentEra,
+                    startX: eraStartX,
+                    endX: currentX - 30
+                });
+            }
+            currentEra = entry.era;
+            eraStartX = currentX - 50;
+        }
+        currentX += itemWidth;
+    });
+
+    // Push last era
+    if (currentEra !== null) {
+        eraPositions.push({
+            name: currentEra,
+            startX: eraStartX,
+            endX: currentX + padding
+        });
+    }
+
+    // Render era backgrounds
+    eraPositions.forEach((era, index) => {
+        const eraData = allEras.find(e => e.name === era.name);
+        const width = era.endX - era.startX;
+
+        const bgDiv = document.createElement('div');
+        bgDiv.className = 'era-bg';
+        bgDiv.dataset.era = era.name;
+        bgDiv.style.left = `${era.startX}px`;
+        bgDiv.style.width = `${width}px`;
+
+        if (eraData && eraData.image) {
+            bgDiv.style.backgroundImage = `url('${eraData.image}')`;
+        }
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'era-bg-overlay';
+        bgDiv.appendChild(overlay);
+
+        // Era label
+        const label = document.createElement('div');
+        label.className = 'era-label';
+        label.textContent = era.name;
+        label.style.left = `${era.startX + width / 2}px`;
+        label.onclick = () => jumpToEra(era.name);
+        bgDiv.appendChild(label);
+
+        // Era divider (except last)
+        if (index < eraPositions.length - 1) {
+            const divider = document.createElement('div');
+            divider.className = 'era-divider';
+            divider.style.left = `${era.endX}px`;
+            bgDiv.appendChild(divider);
+        }
+
+        eraBackgrounds.appendChild(bgDiv);
+    });
+}
+
+// ===== ERA HOVER DETECTION =====
+function setupEraHoverDetection() {
+    const eraBgElements = eraBackgrounds.querySelectorAll('.era-bg');
+    
+    timelinesContainer.addEventListener('scroll', () => {
+        updateActiveEra();
+    });
+
+    updateActiveEra();
+}
+
+function updateActiveEra() {
+    const scrollLeft = timelinesContainer.scrollLeft;
+    const containerWidth = timelinesContainer.offsetWidth;
+    const centerX = scrollLeft + containerWidth / 2 - 120; // Account for label width
+
+    const eraBgElements = eraBackgrounds.querySelectorAll('.era-bg');
+    let activeEra = null;
+
+    eraBgElements.forEach(bg => {
+        const left = parseFloat(bg.style.left);
+        const width = parseFloat(bg.style.width);
+        const right = left + width;
+
+        if (centerX >= left && centerX <= right) {
+            activeEra = bg.dataset.era;
+        }
+
+        bg.classList.remove('active');
+    });
+
+    if (activeEra) {
+        eraBackgrounds.querySelector(`.era-bg[data-era="${activeEra}"]`)?.classList.add('active');
+    }
 }
 
 // ===== RENDER ALL TIMELINES =====
@@ -114,7 +290,6 @@ function renderAllTimelines() {
 function renderMainTimeline() {
     mainTimeline.innerHTML = '';
 
-    // Group by sortOrder for positioning
     const grouped = groupBySortOrder(mainEntries);
 
     Object.keys(grouped).sort((a, b) => a - b).forEach(sortOrder => {
@@ -125,7 +300,6 @@ function renderMainTimeline() {
             const item = createMainEntry(entry);
             mainTimeline.appendChild(item);
         } else {
-            // Multiple entries at same position
             const group = document.createElement('div');
             group.className = 'timeline-item-group';
             
@@ -147,6 +321,7 @@ function createMainEntry(entry) {
     div.dataset.type = entry.type;
     div.dataset.id = entry.id || '';
     div.dataset.sortOrder = entry.sortOrder || 0;
+    div.dataset.era = entry.era || '';
 
     const imgSrc = entry.image || 'https://via.placeholder.com/140x90/2a2a3e/666?text=No+Image';
     const entryColor = entry.color || typeColors[entry.type] || '#888';
@@ -176,7 +351,6 @@ function renderLostRelicsTimeline() {
             const item = createLostRelicItem(relics[0]);
             lostRelicsTimeline.appendChild(item);
         } else {
-            // Multiple relics at same position
             const group = document.createElement('div');
             group.className = 'timeline-item-group';
 
@@ -195,6 +369,7 @@ function createLostRelicItem(entry) {
     div.className = 'timeline-item lost-relic-item';
     div.dataset.id = entry.id || '';
     div.dataset.sortOrder = entry.sortOrder || 0;
+    div.dataset.era = entry.era || '';
 
     const shortDesc = entry.summary || entry.content || '';
     const truncatedDesc = shortDesc.length > 60 ? shortDesc.substring(0, 60) + '...' : shortDesc;
@@ -221,7 +396,6 @@ function renderSideMissionsTimeline() {
             const item = createSideMissionItem(missions[0]);
             sideMissionsTimeline.appendChild(item);
         } else {
-            // Multiple missions at same position
             const group = document.createElement('div');
             group.className = 'timeline-item-group';
 
@@ -240,6 +414,7 @@ function createSideMissionItem(entry) {
     div.className = 'timeline-item side-mission-item';
     div.dataset.id = entry.id || '';
     div.dataset.sortOrder = entry.sortOrder || 0;
+    div.dataset.era = entry.era || '';
 
     const youtubeLink = entry.youtube ? entry.youtube : '#';
     const linkText = entry.youtube ? 'Watch Video' : 'No Video';
@@ -249,7 +424,6 @@ function createSideMissionItem(entry) {
         <a class="mission-link" href="${youtubeLink}" target="_blank" rel="noopener noreferrer">${linkText}</a>
     `;
 
-    // Click opens modal, but stop propagation on link
     div.onclick = (e) => {
         if (!e.target.classList.contains('mission-link')) {
             openModal(entry);
@@ -272,7 +446,6 @@ function renderSecondaryTimeline() {
             const item = createSecondaryEntry(entries[0]);
             secondaryTimeline.appendChild(item);
         } else {
-            // Multiple entries at same position
             const group = document.createElement('div');
             group.className = 'timeline-item-group';
 
@@ -292,6 +465,7 @@ function createSecondaryEntry(entry) {
     div.dataset.type = entry.type;
     div.dataset.id = entry.id || '';
     div.dataset.sortOrder = entry.sortOrder || 0;
+    div.dataset.era = entry.era || '';
 
     const imgSrc = entry.image || 'https://via.placeholder.com/120x75/2a2a3e/666?text=No+Image';
     const entryColor = entry.color || typeColors[entry.type] || '#888';
@@ -494,7 +668,6 @@ function applyFilters() {
     const location = filterLocation.value;
     const search = searchInput.value.toLowerCase();
 
-    // Filter each array separately
     mainEntries = ENTRIES.filter(e => {
         if (e.type === 'lost_relic' || e.type === 'side_mission' || e.timelinePosition === 'secondary') return false;
         return matchesFilter(e, type, era, character, location, search);
@@ -517,6 +690,7 @@ function applyFilters() {
 
     applySort();
     renderAllTimelines();
+    renderEraBackgrounds();
     showToast(`Showing ${mainEntries.length + lostRelics.length + sideMissions.length + secondaryEntries.length} entries`);
 }
 
@@ -721,7 +895,6 @@ function checkURLHash() {
 
 // ===== ERA JUMP =====
 function jumpToEra(era) {
-    // Find first entry of this era
     const firstEntry = allEntries.find(e => e.era === era);
     if (firstEntry) {
         const entryEl = document.querySelector(`[data-id="${firstEntry.id}"]`);
