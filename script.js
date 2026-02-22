@@ -1,6 +1,9 @@
 // ===== STATE =====
-let entries = [...ENTRIES];
-let allEntries = [...ENTRIES];
+let mainEntries = [];
+let lostRelics = [];
+let sideMissions = [];
+let secondaryEntries = [];
+let allEntries = [];
 let currentEntryIndex = 0;
 let filteredIndices = [];
 let bookmarks = JSON.parse(localStorage.getItem('timelineBookmarks') || '[]');
@@ -10,7 +13,11 @@ let startX = 0;
 let scrollLeft = 0;
 
 // ===== DOM ELEMENTS =====
-const timeline = document.getElementById('timeline');
+const timelinesContainer = document.getElementById('timelinesContainer');
+const mainTimeline = document.getElementById('mainTimeline');
+const lostRelicsTimeline = document.getElementById('lostRelicsTimeline');
+const sideMissionsTimeline = document.getElementById('sideMissionsTimeline');
+const secondaryTimeline = document.getElementById('secondaryTimeline');
 const modal = document.getElementById('modal');
 const modalBody = document.getElementById('modalBody');
 const searchInput = document.getElementById('searchInput');
@@ -18,27 +25,46 @@ const filterType = document.getElementById('filterType');
 const filterEra = document.getElementById('filterEra');
 const filterCharacter = document.getElementById('filterCharacter');
 const filterLocation = document.getElementById('filterLocation');
-const viewport = document.getElementById('viewport');
 const eraJump = document.getElementById('eraJump');
 const toast = document.getElementById('toast');
 
+// ===== TYPE COLORS =====
+const typeColors = {
+    main_story: '#ff6b6b',
+    event_story: '#4ecdc4',
+    side_mission: '#ffe66d',
+    side_story: '#a29bfe',
+    lost_relic: '#ff9f43'
+};
+
 // ===== INITIALIZE =====
 function init() {
+    // Separate entries by type
+    separateEntries();
     populateFilters();
-    render();
+    renderAllTimelines();
     setupEventListeners();
     checkURLHash();
-    setTimeout(scrollToStartPoint, 300);
 }
 
-function scrollToStartPoint() {
-    if (window.location.hash) return;
-    const startEntry = allEntries.find(e => e.isStartPoint);
-    if (!startEntry) return;
-    const entryEl = document.querySelector(`.entry[data-id="${startEntry.id}"]`);
-    if (entryEl) {
-        entryEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
-    }
+function separateEntries() {
+    mainEntries = [];
+    lostRelics = [];
+    sideMissions = [];
+    secondaryEntries = [];
+    allEntries = [...ENTRIES];
+
+    ENTRIES.forEach(entry => {
+        if (entry.type === 'lost_relic') {
+            lostRelics.push(entry);
+        } else if (entry.type === 'side_mission') {
+            sideMissions.push(entry);
+        } else if (entry.timelinePosition === 'secondary') {
+            secondaryEntries.push(entry);
+        } else {
+            mainEntries.push(entry);
+        }
+    });
 }
 
 // ===== POPULATE FILTERS =====
@@ -67,110 +93,236 @@ function populateFilters() {
     Array.from(locations).sort().forEach(loc => {
         filterLocation.innerHTML += `<option value="${loc}">${loc}</option>`;
     });
+
+    // Era jump buttons
+    eraJump.innerHTML = '<span>Jump to Era:</span>';
+    eras.forEach(era => {
+        eraJump.innerHTML += `<button data-era="${era}">${era}</button>`;
+    });
 }
 
-// ===== RENDER TIMELINE =====
-function render() {
-    timeline.innerHTML = '';
-
-    // Group by era
-    const eras = {};
-    entries.forEach(e => {
-        if (!eras[e.era]) eras[e.era] = [];
-        eras[e.era].push(e);
-    });
-
-    let isBottom = false;
-    let eraIndex = 0;
-
-    eraJump.innerHTML = '<span>Jump to Era:</span>';
-
-    Object.keys(eras).forEach((era, idx, eraKeys) => {
-        eraJump.innerHTML += `<button data-era="${era}">${era}</button>`;
-
-        const group = document.createElement('div');
-        group.className = 'era-group';
-        group.dataset.era = era;
-        group.dataset.eraIndex = eraIndex;
-        group.id = `era-${era.replace(/\s+/g, '-').toLowerCase()}`;
-
-        // Get first entry with an image for background
-        const firstEntryWithImage = eras[era].find(e => e.image);
-        if (firstEntryWithImage && firstEntryWithImage.image) {
-            group.style.setProperty('--era-bg-image', `url('${firstEntryWithImage.image}')`);
-        }
-
-        // Era label
-        const label = document.createElement('span');
-        label.className = 'era-label';
-        label.textContent = era;
-        group.appendChild(label);
-
-        // Era background overlay
-        const bgOverlay = document.createElement('div');
-        bgOverlay.className = 'era-bg-overlay';
-        group.appendChild(bgOverlay);
-
-        // Era divider (except for last era)
-        if (idx < eraKeys.length - 1) {
-            const divider = document.createElement('div');
-            divider.className = 'era-divider';
-            group.appendChild(divider);
-        }
-
-        const sortedEntries = [...eras[era]].sort((a, b) => {
-            const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
-            const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
-            return orderA - orderB;
-        });
-
-        sortedEntries.forEach(entry => {
-            const div = document.createElement('div');
-            div.className = 'entry';
-            if (entry.important) div.classList.add('important');
-            if (entry.isStartPoint) div.classList.add('start-point');
-            div.dataset.type = entry.type;
-            div.dataset.id = entry.id || '';
-
-            // Use entry image or placeholder
-            const imgSrc = entry.image || 'https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image';
-            
-            // Type indicator color (can be overridden by entry.color)
-            const typeColors = {
-                main_story: '#ff6b6b',
-                event_story: '#4ecdc4',
-                side_mission: '#ffe66d',
-                side_story: '#a29bfe'
-            };
-            
-            // Use entry.color if defined, otherwise use type color
-            const entryColor = entry.color || typeColors[entry.type] || '#888';
-
-            div.innerHTML = `
-                <div class="entry-box ${isBottom ? 'bottom' : ''}">
-                    <img class="entry-image" src="${imgSrc}" alt="${entry.title}" onerror="this.src='https://via.placeholder.com/120x80/2a2a3e/666?text=No+Image'">
-                    <div class="entry-type-bar" style="background:${entryColor}"></div>
-                </div>
-                <span class="entry-title ${isBottom ? 'bottom' : ''}">${entry.title}</span>
-            `;
-
-            div.onclick = () => openModal(entry);
-            group.appendChild(div);
-
-            isBottom = !isBottom;
-        });
-
-        timeline.appendChild(group);
-        eraIndex++;
-    });
-
+// ===== RENDER ALL TIMELINES =====
+function renderAllTimelines() {
+    renderMainTimeline();
+    renderLostRelicsTimeline();
+    renderSideMissionsTimeline();
+    renderSecondaryTimeline();
     updateFilteredIndices();
+}
+
+// ===== RENDER MAIN TIMELINE =====
+function renderMainTimeline() {
+    mainTimeline.innerHTML = '';
+
+    // Group by sortOrder for positioning
+    const grouped = groupBySortOrder(mainEntries);
+
+    Object.keys(grouped).sort((a, b) => a - b).forEach(sortOrder => {
+        const entries = grouped[sortOrder];
+        
+        if (entries.length === 1) {
+            const entry = entries[0];
+            const item = createMainEntry(entry);
+            mainTimeline.appendChild(item);
+        } else {
+            // Multiple entries at same position
+            const group = document.createElement('div');
+            group.className = 'timeline-item-group';
+            
+            entries.forEach(entry => {
+                const item = createMainEntry(entry);
+                group.appendChild(item);
+            });
+            
+            mainTimeline.appendChild(group);
+        }
+    });
+}
+
+function createMainEntry(entry) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item main-entry';
+    if (entry.important) div.classList.add('important');
+    if (entry.isStartPoint) div.classList.add('start-point');
+    div.dataset.type = entry.type;
+    div.dataset.id = entry.id || '';
+    div.dataset.sortOrder = entry.sortOrder || 0;
+
+    const imgSrc = entry.image || 'https://via.placeholder.com/140x90/2a2a3e/666?text=No+Image';
+    const entryColor = entry.color || typeColors[entry.type] || '#888';
+
+    div.innerHTML = `
+        <div class="entry-box">
+            <img class="entry-image" src="${imgSrc}" alt="${entry.title}" onerror="this.src='https://via.placeholder.com/140x90/2a2a3e/666?text=No+Image'">
+            <div class="entry-type-bar" style="background:${entryColor}"></div>
+        </div>
+        <span class="entry-title">${entry.title}</span>
+    `;
+
+    div.onclick = () => openModal(entry);
+    return div;
+}
+
+// ===== RENDER LOST RELICS TIMELINE =====
+function renderLostRelicsTimeline() {
+    lostRelicsTimeline.innerHTML = '';
+
+    const grouped = groupBySortOrder(lostRelics);
+
+    Object.keys(grouped).sort((a, b) => a - b).forEach(sortOrder => {
+        const relics = grouped[sortOrder];
+
+        if (relics.length === 1) {
+            const item = createLostRelicItem(relics[0]);
+            lostRelicsTimeline.appendChild(item);
+        } else {
+            // Multiple relics at same position
+            const group = document.createElement('div');
+            group.className = 'timeline-item-group';
+
+            relics.forEach(relic => {
+                const item = createLostRelicItem(relic);
+                group.appendChild(item);
+            });
+
+            lostRelicsTimeline.appendChild(group);
+        }
+    });
+}
+
+function createLostRelicItem(entry) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item lost-relic-item';
+    div.dataset.id = entry.id || '';
+    div.dataset.sortOrder = entry.sortOrder || 0;
+
+    const shortDesc = entry.summary || entry.content || '';
+    const truncatedDesc = shortDesc.length > 60 ? shortDesc.substring(0, 60) + '...' : shortDesc;
+
+    div.innerHTML = `
+        <div class="relic-title">${entry.title}</div>
+        <div class="relic-desc">${truncatedDesc}</div>
+    `;
+
+    div.onclick = () => openModal(entry);
+    return div;
+}
+
+// ===== RENDER SIDE MISSIONS TIMELINE =====
+function renderSideMissionsTimeline() {
+    sideMissionsTimeline.innerHTML = '';
+
+    const grouped = groupBySortOrder(sideMissions);
+
+    Object.keys(grouped).sort((a, b) => a - b).forEach(sortOrder => {
+        const missions = grouped[sortOrder];
+
+        if (missions.length === 1) {
+            const item = createSideMissionItem(missions[0]);
+            sideMissionsTimeline.appendChild(item);
+        } else {
+            // Multiple missions at same position
+            const group = document.createElement('div');
+            group.className = 'timeline-item-group';
+
+            missions.forEach(mission => {
+                const item = createSideMissionItem(mission);
+                group.appendChild(item);
+            });
+
+            sideMissionsTimeline.appendChild(group);
+        }
+    });
+}
+
+function createSideMissionItem(entry) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item side-mission-item';
+    div.dataset.id = entry.id || '';
+    div.dataset.sortOrder = entry.sortOrder || 0;
+
+    const youtubeLink = entry.youtube ? entry.youtube : '#';
+    const linkText = entry.youtube ? 'Watch Video' : 'No Video';
+
+    div.innerHTML = `
+        <div class="mission-title">${entry.title}</div>
+        <a class="mission-link" href="${youtubeLink}" target="_blank" rel="noopener noreferrer">${linkText}</a>
+    `;
+
+    // Click opens modal, but stop propagation on link
+    div.onclick = (e) => {
+        if (!e.target.classList.contains('mission-link')) {
+            openModal(entry);
+        }
+    };
+
+    return div;
+}
+
+// ===== RENDER SECONDARY TIMELINE =====
+function renderSecondaryTimeline() {
+    secondaryTimeline.innerHTML = '';
+
+    const grouped = groupBySortOrder(secondaryEntries);
+
+    Object.keys(grouped).sort((a, b) => a - b).forEach(sortOrder => {
+        const entries = grouped[sortOrder];
+
+        if (entries.length === 1) {
+            const item = createSecondaryEntry(entries[0]);
+            secondaryTimeline.appendChild(item);
+        } else {
+            // Multiple entries at same position
+            const group = document.createElement('div');
+            group.className = 'timeline-item-group';
+
+            entries.forEach(entry => {
+                const item = createSecondaryEntry(entry);
+                group.appendChild(item);
+            });
+
+            secondaryTimeline.appendChild(group);
+        }
+    });
+}
+
+function createSecondaryEntry(entry) {
+    const div = document.createElement('div');
+    div.className = 'timeline-item secondary-entry';
+    div.dataset.type = entry.type;
+    div.dataset.id = entry.id || '';
+    div.dataset.sortOrder = entry.sortOrder || 0;
+
+    const imgSrc = entry.image || 'https://via.placeholder.com/120x75/2a2a3e/666?text=No+Image';
+    const entryColor = entry.color || typeColors[entry.type] || '#888';
+
+    div.innerHTML = `
+        <div class="entry-box">
+            <img class="entry-image" src="${imgSrc}" alt="${entry.title}" onerror="this.src='https://via.placeholder.com/120x75/2a2a3e/666?text=No+Image'">
+            <div class="entry-type-bar" style="background:${entryColor}"></div>
+        </div>
+        <span class="entry-title">${entry.title}</span>
+    `;
+
+    div.onclick = () => openModal(entry);
+    return div;
+}
+
+// ===== HELPER: GROUP BY SORT ORDER =====
+function groupBySortOrder(entries) {
+    const grouped = {};
+    entries.forEach(entry => {
+        const order = entry.sortOrder !== undefined ? entry.sortOrder : (entry.year || 0);
+        if (!grouped[order]) grouped[order] = [];
+        grouped[order].push(entry);
+    });
+    return grouped;
 }
 
 // ===== UPDATE FILTERED INDICES =====
 function updateFilteredIndices() {
     filteredIndices = [];
-    entries.forEach((entry, index) => {
+    allEntries.forEach((entry, index) => {
         if (entry.id) {
             filteredIndices.push({
                 id: entry.id,
@@ -215,13 +367,6 @@ function renderModalContent(entry) {
     bookmarkBtn.textContent = isBookmarked ? '★ Bookmarked' : '☆ Add to Bookmarks';
     bookmarkBtn.classList.toggle('bookmarked', isBookmarked);
 
-    // Type colors (can be overridden by entry.color)
-    const typeColors = {
-        main_story: '#ff6b6b',
-        event_story: '#4ecdc4',
-        side_mission: '#ffe66d',
-        side_story: '#a29bfe'
-    };
     const entryColor = entry.color || typeColors[entry.type] || '#888';
 
     let html = `
@@ -230,7 +375,7 @@ function renderModalContent(entry) {
         <div class="modal-meta">
     `;
 
-    html += `<span>📅 ${entry.era}`;
+    html += `<span>📅 ${entry.era || 'Unknown Era'}`;
     if (entry.timeline) {
         html += ` | ${entry.timeline}`;
     } else if (entry.year !== undefined) {
@@ -258,9 +403,8 @@ function renderModalContent(entry) {
 
     html += `</div>`;
 
-    // Full image display
     if (entry.image) {
-    html += `<img class="modal-image" src="${entry.image}" alt="${entry.title}">`;
+        html += `<img class="modal-image" src="${entry.image}" alt="${entry.title}">`;
     }
 
     if (entry.tags && entry.tags.length) {
@@ -271,7 +415,7 @@ function renderModalContent(entry) {
         html += `</div>`;
     }
 
-    html += `<div class="modal-body">${entry.content || entry.summary}</div>`;
+    html += `<div class="modal-body">${entry.content || entry.summary || ''}</div>`;
 
     if (entry.youtube) {
         html += `<iframe class="modal-video" src="${entry.youtube}" frameborder="0" allowfullscreen></iframe>`;
@@ -350,28 +494,49 @@ function applyFilters() {
     const location = filterLocation.value;
     const search = searchInput.value.toLowerCase();
 
-    entries = allEntries.filter(entry => {
-        if (type && entry.type !== type) return false;
-        if (era && entry.era !== era) return false;
-        if (character && (!entry.characters || !entry.characters.includes(character))) return false;
-        if (location && (!entry.locations || !entry.locations.includes(location))) return false;
+    // Filter each array separately
+    mainEntries = ENTRIES.filter(e => {
+        if (e.type === 'lost_relic' || e.type === 'side_mission' || e.timelinePosition === 'secondary') return false;
+        return matchesFilter(e, type, era, character, location, search);
+    });
 
-        if (search) {
-            const searchMatch =
-                entry.title.toLowerCase().includes(search) ||
-                (entry.summary && entry.summary.toLowerCase().includes(search)) ||
-                (entry.content && entry.content.toLowerCase().includes(search)) ||
-                (entry.characters && entry.characters.some(c => c.toLowerCase().includes(search))) ||
-                (entry.locations && entry.locations.some(l => l.toLowerCase().includes(search))) ||
-                (entry.tags && entry.tags.some(t => t.toLowerCase().includes(search)));
-            if (!searchMatch) return false;
-        }
-        return true;
+    lostRelics = ENTRIES.filter(e => {
+        if (e.type !== 'lost_relic') return false;
+        return matchesFilter(e, '', era, character, location, search);
+    });
+
+    sideMissions = ENTRIES.filter(e => {
+        if (e.type !== 'side_mission') return false;
+        return matchesFilter(e, '', era, character, location, search);
+    });
+
+    secondaryEntries = ENTRIES.filter(e => {
+        if (e.timelinePosition !== 'secondary') return false;
+        return matchesFilter(e, type, era, character, location, search);
     });
 
     applySort();
-    render();
-    showToast(`Showing ${entries.length} entries`);
+    renderAllTimelines();
+    showToast(`Showing ${mainEntries.length + lostRelics.length + sideMissions.length + secondaryEntries.length} entries`);
+}
+
+function matchesFilter(entry, type, era, character, location, search) {
+    if (type && entry.type !== type) return false;
+    if (era && entry.era !== era) return false;
+    if (character && (!entry.characters || !entry.characters.includes(character))) return false;
+    if (location && (!entry.locations || !entry.locations.includes(location))) return false;
+
+    if (search) {
+        const searchMatch =
+            entry.title.toLowerCase().includes(search) ||
+            (entry.summary && entry.summary.toLowerCase().includes(search)) ||
+            (entry.content && entry.content.toLowerCase().includes(search)) ||
+            (entry.characters && entry.characters.some(c => c.toLowerCase().includes(search))) ||
+            (entry.locations && entry.locations.some(l => l.toLowerCase().includes(search))) ||
+            (entry.tags && entry.tags.some(t => t.toLowerCase().includes(search)));
+        if (!searchMatch) return false;
+    }
+    return true;
 }
 
 function filterByTag(tag) {
@@ -394,21 +559,33 @@ function filterByLocation(location) {
 
 // ===== SORTING =====
 function applySort() {
+    const sortFn = (a, b) => {
+        const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
+        const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
+        return orderA - orderB;
+    };
+
     switch (currentSort) {
         case 'title':
-            entries.sort((a, b) => a.title.localeCompare(b.title));
+            const titleSort = (a, b) => a.title.localeCompare(b.title);
+            mainEntries.sort(titleSort);
+            lostRelics.sort(titleSort);
+            sideMissions.sort(titleSort);
+            secondaryEntries.sort(titleSort);
             break;
         case 'type':
-            entries.sort((a, b) => a.type.localeCompare(b.type));
+            const typeSort = (a, b) => a.type.localeCompare(b.type);
+            mainEntries.sort(typeSort);
+            lostRelics.sort(typeSort);
+            sideMissions.sort(typeSort);
+            secondaryEntries.sort(typeSort);
             break;
         case 'year':
-            entries.sort((a, b) => {
-                const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
-                const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
-                return orderA - orderB;
-            });
-            break;
         default:
+            mainEntries.sort(sortFn);
+            lostRelics.sort(sortFn);
+            sideMissions.sort(sortFn);
+            secondaryEntries.sort(sortFn);
             break;
     }
 }
@@ -449,11 +626,11 @@ function nextEntry() {
 }
 
 function highlightEntry(entryId) {
-    document.querySelectorAll('.entry.highlighted').forEach(e => {
+    document.querySelectorAll('.highlighted').forEach(e => {
         e.classList.remove('highlighted');
     });
 
-    const entryEl = document.querySelector(`.entry[data-id="${entryId}"]`);
+    const entryEl = document.querySelector(`[data-id="${entryId}"]`);
     if (entryEl) {
         entryEl.classList.add('highlighted');
         entryEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
@@ -544,9 +721,13 @@ function checkURLHash() {
 
 // ===== ERA JUMP =====
 function jumpToEra(era) {
-    const eraGroup = document.getElementById(`era-${era.replace(/\s+/g, '-').toLowerCase()}`);
-    if (eraGroup) {
-        eraGroup.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+    // Find first entry of this era
+    const firstEntry = allEntries.find(e => e.era === era);
+    if (firstEntry) {
+        const entryEl = document.querySelector(`[data-id="${firstEntry.id}"]`);
+        if (entryEl) {
+            entryEl.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+        }
     }
 }
 
@@ -574,10 +755,10 @@ function handleKeyboard(e) {
     } else {
         switch (e.key) {
             case 'ArrowLeft':
-                viewport.scrollBy({ left: -200, behavior: 'smooth' });
+                timelinesContainer.scrollBy({ left: -200, behavior: 'smooth' });
                 break;
             case 'ArrowRight':
-                viewport.scrollBy({ left: 200, behavior: 'smooth' });
+                timelinesContainer.scrollBy({ left: 200, behavior: 'smooth' });
                 break;
         }
     }
@@ -586,8 +767,8 @@ function handleKeyboard(e) {
 // ===== DRAG TO SCROLL =====
 function startDrag(e) {
     isDown = true;
-    startX = e.pageX - viewport.offsetLeft;
-    scrollLeft = viewport.scrollLeft;
+    startX = e.pageX - timelinesContainer.offsetLeft;
+    scrollLeft = timelinesContainer.scrollLeft;
 }
 
 function endDrag() {
@@ -597,8 +778,8 @@ function endDrag() {
 function doDrag(e) {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - viewport.offsetLeft;
-    viewport.scrollLeft = scrollLeft - (x - startX);
+    const x = e.pageX - timelinesContainer.offsetLeft;
+    timelinesContainer.scrollLeft = scrollLeft - (x - startX);
 }
 
 // ===== DEBOUNCE =====
@@ -653,10 +834,12 @@ function setupEventListeners() {
 
     document.addEventListener('keydown', handleKeyboard);
 
-    viewport.addEventListener('mousedown', startDrag);
-    viewport.addEventListener('mouseup', endDrag);
-    viewport.addEventListener('mouseleave', endDrag);
-    viewport.addEventListener('mousemove', doDrag);
+    timelinesContainer.addEventListener('mousedown', startDrag);
+    timelinesContainer.addEventListener('mouseup', endDrag);
+    timelinesContainer.addEventListener('mouseleave', endDrag);
+    timelinesContainer.addEventListener('mousemove', doDrag);
+
+    window.addEventListener('hashchange', checkURLHash);
 }
 
 // ===== START =====
