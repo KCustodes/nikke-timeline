@@ -148,21 +148,18 @@ function renderEraBackgrounds() {
 
     if (allEras.length === 0) return;
 
-    // Calculate positions based on sort order
+    // Get all entries sorted by sortOrder
     const allSortedEntries = [...allEntries].sort((a, b) => {
         const orderA = a.sortOrder !== undefined ? a.sortOrder : (a.year || 0);
         const orderB = b.sortOrder !== undefined ? b.sortOrder : (b.year || 0);
         return orderA - orderB;
     });
 
-    // Calculate total width and era positions
+    // Calculate positions
     const itemWidth = 170; // Approximate width per item including margin
-    const padding = 100;
+    const padding = 50;
     const labelWidth = 120;
     
-    let currentX = padding + labelWidth;
-    let eraPositions = [];
-
     // Group entries by era and calculate positions
     const eraGroups = {};
     allSortedEntries.forEach(entry => {
@@ -173,21 +170,25 @@ function renderEraBackgrounds() {
         eraGroups[entry.era].push(entry);
     });
 
-    // Calculate era boundaries
-    let eraStartX = currentX;
+    // Calculate era boundaries based on entry positions
+    let eraPositions = [];
+    let currentX = padding + labelWidth;
     let currentEra = null;
+    let eraStartX = currentX;
 
-    allSortedEntries.forEach((entry, index) => {
+    allSortedEntries.forEach((entry) => {
         if (entry.era !== currentEra) {
+            // Save previous era
             if (currentEra !== null) {
                 eraPositions.push({
                     name: currentEra,
                     startX: eraStartX,
-                    endX: currentX - 30
+                    endX: currentX - 15
                 });
             }
+            // Start new era
             currentEra = entry.era;
-            eraStartX = currentX - 50;
+            eraStartX = currentX - 30;
         }
         currentX += itemWidth;
     });
@@ -221,11 +222,12 @@ function renderEraBackgrounds() {
         overlay.className = 'era-bg-overlay';
         bgDiv.appendChild(overlay);
 
-        // Era label
+        // Era label - positioned at center of era width
         const label = document.createElement('div');
         label.className = 'era-label';
         label.textContent = era.name;
-        label.style.left = `${era.startX + width / 2}px`;
+        label.style.left = '0';
+        label.style.width = `${width}px`;
         label.onclick = () => jumpToEra(era.name);
         bgDiv.appendChild(label);
 
@@ -233,7 +235,7 @@ function renderEraBackgrounds() {
         if (index < eraPositions.length - 1) {
             const divider = document.createElement('div');
             divider.className = 'era-divider';
-            divider.style.left = `${era.endX}px`;
+            divider.style.left = `${width}px`;
             bgDiv.appendChild(divider);
         }
 
