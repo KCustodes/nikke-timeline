@@ -160,6 +160,148 @@ body {
     cursor: grabbing;
 }
 
+/* ===== ERA BACKGROUNDS ===== */
+.era-backgrounds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    min-width: max-content;
+}
+
+.era-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.era-bg.active {
+    opacity: 0.55;
+}
+
+.era-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(13, 13, 26, 0.7) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.era-bg.active .era-bg-overlay {
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(13, 13, 26, 0.5) 100%);
+}
+
+.era-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, 
+        transparent 0%, 
+        rgba(199, 125, 255, 0.3) 10%, 
+        rgba(199, 125, 255, 0.6) 50%, 
+        rgba(199, 125, 255, 0.3) 90%, 
+        transparent 100%
+    );
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(199, 125, 255, 0.3);
+}
+
+.era-label {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #c77dff;
+    text-shadow: 0 2px 15px rgba(199, 125, 255, 0.5);
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: auto;
+    cursor: pointer;
+    background: rgba(13, 13, 26, 0.6);
+    padding: 5px 15px;
+    border-radius: 15px;
+    transition: all 0.2s;
+}
+
+.era-label:hover {
+    background: rgba(199, 125, 255, 0.3);
+}
+
+/* ===== TIMELINE TRACK ===== */
+.timeline-track {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid rgba(199, 125, 255, 0.15);
+    min-height: 120px;
+    z-index: 5;
+}
+
+.timeline-track:last-child {
+    border-bottom: none;
+}
+
+.track-label {
+    position: sticky;
+    left: 0;
+    width: 120px;
+    min-width: 120px;
+    background: linear-gradient(90deg, #0d0d1a 0%, #0d0d1a 90%, transparent 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #c77dff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+    padding: 10px;
+    text-align: center;
+}
+
+.track-content {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-items {
+    display: flex;
+    align-items: center;
+    min-width: max-content;
+    padding: 15px 50px;
+    position: relative;
+    width: 100%;
+}
+
+/* Timeline line for each track */
+.timeline-items::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(199, 125, 255, 0.3), transparent);
+    transform: translateY(-50%);
+    z-index: 0;
+}
 /* ===== TIMELINE TRACK ===== */
 .timeline-track {
     position: relative;
