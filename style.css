@@ -235,7 +235,7 @@ body {
 /* Era label */
 .era-label {
     position: absolute;
-    top: -60px;
+    top: -100px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.4rem;
