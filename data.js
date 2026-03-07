@@ -535,7 +535,7 @@ const ENTRIES = [
         sortOrder: 130,
         summary: "Content...",
         content: "Full description...",
-        characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Mustang" "Syuen", "Snow White", "Diesel", "Brid", "Soline", "Sugar", "Chatterbox", "Modernia", "Marian", "Rian"],
+        characters: ["The Commander", "Rapi", "Anis", "Neon", "Shifty", "Andersen", "Ingrid", "Mustang", "Syuen", "Snow White", "Diesel", "Brid", "Soline", "Sugar", "Chatterbox", "Modernia", "Marian", "Rian"],
         locations: ["The Surface", "The Ark", "The Outpost"],
         tags: ["Chapter 13"],
         image: "images/Chapter Thumbnails/Chapter 13.png",
