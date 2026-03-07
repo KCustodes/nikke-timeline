@@ -235,7 +235,7 @@ body {
 /* Era label */
 .era-label {
     position: absolute;
-    top: -100px;
+    top: -105px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 1.4rem;
@@ -405,12 +405,12 @@ body {
 
 .entry-title.bottom {
     top: auto;
-    bottom: calc(100% + 5px);
+    bottom: calc(100% + 2px);
 }
 
 .entry-title:not(.bottom) {
     bottom: auto;
-    top: calc(100% + 5px);
+    top: calc(100% + 2px);
 }
 
 .entry:hover .entry-title {
