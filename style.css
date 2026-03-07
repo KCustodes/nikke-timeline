@@ -405,7 +405,7 @@ body {
 
 .entry-title.bottom {
     top: auto;
-    bottom: calc(100% + 105px);
+    bottom: calc(100% + 5px);
 }
 
 .entry-title:not(.bottom) {
