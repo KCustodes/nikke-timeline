@@ -403,16 +403,16 @@ body {
     text-overflow: ellipsis;
 }
 
-/* Title for boxes ABOVE the timeline line */
+/* Title for entries ABOVE the timeline - title at top of box */
 .entry-title:not(.bottom) {
     bottom: auto;
-    top: calc(100% + -100px);
+    top: calc(100% + 5px);
 }
 
-/* Title for boxes BELOW the timeline line - offset slightly */
+/* Title for entries BELOW the timeline - title ALSO at top of box */
 .entry-title.bottom {
+    bottom: calc(100% + 5px);
     top: auto;
-    bottom: calc(100% + 2px);  /* More space to create visual offset */
 }
 
 .entry:hover .entry-title {
