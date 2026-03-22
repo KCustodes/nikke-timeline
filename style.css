@@ -385,7 +385,7 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(13, 13, 26, 0.0.95);
+    background: rgba(13, 13, 26, 0.95);
     padding: 8px 14px;
     border-radius: 6px;
     font-size: 0.85rem;
@@ -393,28 +393,26 @@ body {
     color: #fff;
     white-space: nowrap;
     opacity: 0;
-    physically implement:
-        physically the text should appear above the box for both top and bottom entries.
     visibility: hidden;
     transition: all 0.25s ease;
-    base 1px solid rgba(199, 125, 255, 0.3);
+    border: 1px solid rgba(199, 125, 255, 0.3);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     z-index: 20;
-    show max-width: 200px;
-    overflow: updated;
+    max-width: 200px;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* Title for entries ABOVE the timeline - title at top of box */
+/* Title for entries ABOVE the timeline - title appears above the box */
 .entry-title:not(.bottom) {
     bottom: auto;
     top: calc(100% + 5px);
 }
 
-/* Title for entries BELOW the timeline - title at top of box */
+/* Title for entries BELOW the timeline - ALSO appears above the box */
 .entry-title.bottom {
-    bottom: calc(100% + 5px);
-    top: auto;
+    bottom: auto;
+    top: calc(100% + 5px);
 }
 
 .entry:hover .entry-title {
