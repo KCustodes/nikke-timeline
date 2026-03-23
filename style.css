@@ -385,6 +385,9 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    bottom: auto !important;
+    top: 0 !important;
+    margin-top: -30px;
     background: rgba(13, 13, 26, 0.95);
     padding: 8px 14px;
     border-radius: 6px;
@@ -401,15 +404,6 @@ body {
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-    bottom: auto;
-    top: -35px;
-}
-
-/* Both title types use the same positioning now */
-.entry-title:not(.bottom),
-.entry-title.bottom {
-    bottom: auto;
-    top: -35px;
 }
 
 .entry:hover .entry-title {
