@@ -406,13 +406,13 @@ body {
 /* Title for entries ABOVE the timeline - title appears above the box */
 .entry-title:not(.bottom) {
     bottom: auto;
-    top: calc(100% + 5px);
+    top: calc(100% + -35px);
 }
 
 /* Title for entries BELOW the timeline - ALSO appears above the box */
 .entry-title.bottom {
     bottom: auto;
-    top: calc(100% + 5px);
+    top: calc(100% + -35px);
 }
 
 .entry:hover .entry-title {
