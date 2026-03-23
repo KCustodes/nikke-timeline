@@ -401,18 +401,15 @@ body {
     max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-/* Title for entries ABOVE the timeline - title appears above the box */
-.entry-title:not(.bottom) {
     bottom: auto;
-    top: calc(100% + -35px);
+    top: -35px;
 }
 
-/* Title for entries BELOW the timeline - ALSO appears above the box */
+/* Both title types use the same positioning now */
+.entry-title:not(.bottom),
 .entry-title.bottom {
     bottom: auto;
-    top: calc(100% + -35px);
+    top: -35px;
 }
 
 .entry:hover .entry-title {
